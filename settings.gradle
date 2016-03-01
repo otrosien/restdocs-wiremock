@@ -1,0 +1,10 @@
+include 'wiremock'
+include 'server'
+include 'client'
+
+rootProject.name = 'restdocs-wiremock-parent'
+
+['wiremock','server','client'].each {
+    project(":$it").name = "restdocs-$it"
+}
+
