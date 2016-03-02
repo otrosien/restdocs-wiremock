@@ -35,3 +35,6 @@ targetCompatibility = 1.8
 
 group = 'com.github.otrosien'
 version = "0.1"
+
+assemble.dependsOn(':restdocs-server:publishToMavenLocal')
+compileJava.dependsOn(':restdocs-server:publishToMavenLocal')

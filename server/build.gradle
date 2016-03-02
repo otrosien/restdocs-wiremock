@@ -91,3 +91,5 @@ publishing {
 
 eclipseJdt.onlyIf { false }
 cleanEclipseJdt.onlyIf { false }
+assemble.dependsOn(':restdocs-wiremock:publishToMavenLocal')
+compileJava.dependsOn(':restdocs-wiremock:publishToMavenLocal')
