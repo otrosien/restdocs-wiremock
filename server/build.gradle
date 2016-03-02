@@ -19,8 +19,8 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 repositories {
+    mavenLocal()
     jcenter()
-    maven { url "http://dl.bintray.com/epages/maven" }
     maven { url "https://repo.spring.io/release" }
     maven { url "https://repo.spring.io/milestone" }
 }
