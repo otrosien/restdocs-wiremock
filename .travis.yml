@@ -1,0 +1,10 @@
+language: java
+jdk:
+  - oraclejdk8
+sudo: false
+cache:
+  directories:
+  - $HOME/.gradle
+script: ./gradlew restdocs-wiremock:publishToMavenLocal \
+        && ./gradlew restdocs-server:build restdocs-server:publishToMavenLocal \
+        && ./gradlew restdocs-client:build
