@@ -25,15 +25,15 @@ import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
 public class NoteServiceTest {
 
 	@ClassRule
-	public static WireMockClassRule server = new WireMockClassRule(wireMockConfig()
-			.fileSource(new ClasspathFileSource("wiremock/spring-restdocs-server")).dynamicPort());
+	public static WireMockClassRule SERVER = new WireMockClassRule(wireMockConfig()
+			.fileSource(new ClasspathFileSource("wiremock/restdocs-server")).dynamicPort());
 
 	@Autowired
 	private NoteService noteService;
 
 	@Test
 	public void test() {
-		assertEquals("REST maturity model", noteService.getNote("6").getTitle());
+		assertEquals("REST maturity model", noteService.getNote("1").getTitle());
 	}
 
 	@Configuration
@@ -45,7 +45,7 @@ public class NoteServiceTest {
 			return new NoteServiceConfiguration() {
 				@Override
 				public URI getBaseurl() {
-					return URI.create("http://localhost:" + NoteServiceTest.server.port());
+					return URI.create("http://localhost:" + NoteServiceTest.SERVER.port());
 				}
 			};
 		}

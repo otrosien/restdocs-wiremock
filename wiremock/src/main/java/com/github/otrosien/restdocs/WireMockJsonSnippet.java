@@ -11,7 +11,9 @@ import org.springframework.restdocs.operation.OperationRequest;
 import org.springframework.restdocs.operation.OperationResponse;
 import org.springframework.restdocs.snippet.RestDocumentationContextPlaceholderResolver;
 import org.springframework.restdocs.snippet.Snippet;
+import org.springframework.restdocs.snippet.StandardWriterResolver;
 import org.springframework.restdocs.snippet.WriterResolver;
+import org.springframework.restdocs.templates.TemplateFormat;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,13 +24,27 @@ final class WireMockJsonSnippet implements Snippet {
 
     private static final String SNIPPET_NAME = "wiremock-stub";
 
+    private static final TemplateFormat TEMPLATE_FORMAT = new TemplateFormat() {
+
+        @Override
+        public String getId() {
+            return "json";
+        }
+
+        @Override
+        public String getFileExtension() {
+            return "json";
+        }
+    };
+
     protected WireMockJsonSnippet() {}
 
     @Override
     public void document(Operation operation) throws IOException {
         RestDocumentationContext context = (RestDocumentationContext) operation
                 .getAttributes().get(RestDocumentationContext.class.getName());
-        WriterResolver writerResolver = new JsonWriterResolver(new RestDocumentationContextPlaceholderResolver(context));
+        WriterResolver writerResolver = new StandardWriterResolver(
+                new RestDocumentationContextPlaceholderResolver(context), "UTF-8", TEMPLATE_FORMAT);
         try (Writer writer = writerResolver.resolve(operation.getName(), SNIPPET_NAME, context)) {
             writer.append(toJsonString(operation));
         }
