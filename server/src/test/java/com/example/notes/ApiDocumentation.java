@@ -16,7 +16,7 @@
 
 package com.example.notes;
 
-import static com.github.otrosien.restdocs.WireMockDocumentation.documentWithWireMock;
+import static com.epages.restdocs.WireMockDocumentation.documentWithWireMock;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
@@ -56,7 +56,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.otrosien.restdocs.RestDocumentation;
+import com.epages.restdocs.RestDocumentation;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = RestNotesSpringDataRest.class)

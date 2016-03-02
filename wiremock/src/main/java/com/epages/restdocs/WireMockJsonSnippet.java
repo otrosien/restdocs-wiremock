@@ -1,4 +1,4 @@
-package com.github.otrosien.restdocs;
+package com.epages.restdocs;
 
 import java.io.IOException;
 import java.io.Writer;

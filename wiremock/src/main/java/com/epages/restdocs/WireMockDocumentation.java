@@ -1,4 +1,4 @@
-package com.github.otrosien.restdocs;
+package com.epages.restdocs;
 
 import static org.springframework.restdocs.curl.CurlDocumentation.curlRequest;
 import static org.springframework.restdocs.http.HttpDocumentation.httpRequest;

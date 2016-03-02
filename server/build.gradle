@@ -19,8 +19,8 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 repositories {
-    mavenLocal()
     jcenter()
+    maven { url "http://dl.bintray.com/epages/maven" }
     maven { url "https://repo.spring.io/release" }
     maven { url "https://repo.spring.io/milestone" }
 }
@@ -47,7 +47,7 @@ dependencies {
     testCompile 'com.jayway.jsonpath:json-path'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile "org.springframework.restdocs:spring-restdocs-mockmvc:$springRestdocsVersion"
-    testCompile "com.github.otrosien:restdocs-wiremock:0.1"
+    testCompile "com.epages:restdocs-wiremock:0.2"
 }
 
 test {
