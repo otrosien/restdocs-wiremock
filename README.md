@@ -26,11 +26,11 @@ This repository contains three projects
 ./gradlew restdocs-wiremock:publishToMavenLocal
 ```
 
-You should have `restdocs-wiremock-0.1` in your maven repository:
+You should have `restdocs-wiremock-0.2` in your maven repository:
 
 ```shell
- ls ~/.m2/repository/com/github/otrosien/restdocs-wiremock/0.1/
-restdocs-wiremock-0.1.jar  restdocs-wiremock-0.1.pom
+ ls ~/.m2/repository/com/github/otrosien/restdocs-wiremock/0.2/
+restdocs-wiremock-0.2.jar  restdocs-wiremock-0.1.pom
 ```
 
 2. Run the server tests, which uses the WireMock integration into Spring REST Docs.
@@ -42,8 +42,8 @@ restdocs-wiremock-0.1.jar  restdocs-wiremock-0.1.pom
 As a result, there is a `restdocs-server-wiremock` jar file in your maven repository:
 
 ```shell
-ls ~/.m2/repository/com/github/otrosien/restdocs-server/0.1/
-restdocs-server-0.1-wiremock.jar
+ls ~/.m2/repository/com/github/otrosien/restdocs-server/0.2/
+restdocs-server-0.2-wiremock.jar
 ```
 
 Mind that this jar only contains a set of json files without explicit dependency on WireMock itself. 
