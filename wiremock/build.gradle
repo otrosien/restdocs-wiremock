@@ -21,7 +21,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 group = 'com.epages'
-version = '0.2'
+version = '0.3'
 
 description = 'Adds wiremock stub snippets to Spring REST Docs'
 
