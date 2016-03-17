@@ -17,6 +17,7 @@ public class NoteService {
 	}
 
 	public Note getNote(String id) {
-		return restTemplate.getForObject(config.getBaseurl().resolve("/notes/"+id), Note.class);
+		Note note = restTemplate.getForObject(config.getBaseurl().resolve("/notes/"+id), Note.class);
+		return note;
 	}
 }
