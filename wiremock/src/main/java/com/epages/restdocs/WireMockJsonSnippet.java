@@ -60,7 +60,7 @@ final class WireMockJsonSnippet implements Snippet {
 
 		ImmutableMap.Builder<Object, Object> requestBuilder = ImmutableMap.builder()
 				.put("method", operation.getRequest().getMethod())
-				.put("urlPattern", operation.getRequest().getUri().getRawPath());
+				.put("urlPath", operation.getRequest().getUri().getRawPath());
 
 		ImmutableMap.Builder<Object, Object> responseBuilder = ImmutableMap.builder()
 				.put("status", response.getStatus().value()).put("headers", response.getHeaders())
