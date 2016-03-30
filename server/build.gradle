@@ -26,7 +26,7 @@ repositories {
 }
 
 group = 'com.epages'
-version = '0.5'
+version = '0.5.1'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -47,7 +47,7 @@ dependencies {
     testCompile 'com.jayway.jsonpath:json-path'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile "org.springframework.restdocs:spring-restdocs-mockmvc:$springRestdocsVersion"
-    testCompile "com.epages:restdocs-wiremock:0.5"
+    testCompile "com.epages:restdocs-wiremock:0.5.1"
 }
 
 test {
