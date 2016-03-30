@@ -10,6 +10,8 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
+import org.springframework.restdocs.operation.preprocess.OperationRequestPreprocessor;
+import org.springframework.restdocs.operation.preprocess.OperationResponsePreprocessor;
 import org.springframework.restdocs.snippet.Snippet;
 
 /**
@@ -44,6 +46,43 @@ public final class WireMockDocumentation {
 	 */
 	public static RestDocumentationResultHandler documentWithWireMock(String identifier, Snippet... snippets) {
 		return documentWithWireMock(identifier).snippets(snippets);
+	}
+
+	/**
+	 * Factory method for producing REST-documentation including wiremock stubs.
+	 * 
+	 * @see MockMvcRestDocumentation#document(String,
+	 *      org.springframework.restdocs.operation.preprocess.OperationRequestPreprocessor,
+	 *      Snippet...)
+	 * @param identifier
+	 *            an identifier for the API call that is being documented
+	 * @param requestPreprocessor,
+	 *            a request preprocessor
+	 * @return a Mock MVC {@code ResultHandler} that will produce the
+	 *         documentation
+	 */
+	public static RestDocumentationResultHandler documentWithWireMock(String identifier, OperationRequestPreprocessor requestPreprocessor, Snippet... snippets) {
+		return document(identifier, requestPreprocessor, preprocessResponse(prettyPrint())).snippets(snippets);
+	}
+
+	/**
+	 * Factory method for producing REST-documentation including wiremock stubs.
+	 * 
+	 * @see MockMvcRestDocumentation#document(String,
+	 *      org.springframework.restdocs.operation.preprocess.OperationRequestPreprocessor,
+	 *      org.springframework.restdocs.operation.preprocess.OperationResponsePreprocessor,
+	 *      Snippet...)
+	 * @param identifier
+	 *            an identifier for the API call that is being documented
+	 * @param requestPreprocessor,
+	 *            a request preprocessor
+	 * @param responsePreprocessor,
+	 *            a response preprocessor
+	 * @return a Mock MVC {@code ResultHandler} that will produce the
+	 *         documentation
+	 */
+	public static RestDocumentationResultHandler documentWithWireMock(String identifier, OperationRequestPreprocessor requestPreprocessor, OperationResponsePreprocessor responsePreprocessor, Snippet... snippets) {
+		return document(identifier, requestPreprocessor, responsePreprocessor).snippets(snippets);
 	}
 
 	/**
