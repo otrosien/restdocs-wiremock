@@ -52,7 +52,7 @@ When using maven, add a dependency in test scope.
 You should have `restdocs-wiremock-0.5.1` in your maven repository:
 
 ```shell
- ls ~/.m2/repository/com/github/otrosien/restdocs-wiremock/0.5.1/
+ ls ~/.m2/repository/com/epages/restdocs-wiremock/0.5.1/
 restdocs-wiremock-0.5.1.jar  restdocs-wiremock-0.1.pom
 ```
 
@@ -65,7 +65,7 @@ restdocs-wiremock-0.5.1.jar  restdocs-wiremock-0.1.pom
 As a result, there is a `restdocs-server-wiremock` jar file in your maven repository:
 
 ```shell
-ls ~/.m2/repository/com/github/otrosien/restdocs-server/0.5.1/
+ls ~/.m2/repository/com/epages/restdocs-server/0.5.1/
 restdocs-server-0.5.1-wiremock.jar
 ```
 
