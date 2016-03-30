@@ -17,20 +17,43 @@ This repository contains three projects
 * `restdocs-server`: A sample server documenting its REST API (the Spring REST Docs "notes" example)
 * `restdocs-client`: The client using the server API, with integration testing against a wiremock implementation.
 
-## How to run the examples
 
-1. Publish the restdocs-wiremock artifact into your `mavenLocal`, as this project is not released yet.
+## How to include `restdocs-wiremock` into your project
+
+When using gradle, add a testCompile dependency.
+
+```
+dependencies {
+  testCompile('com.epages:restdocs-wiremock:0.5.1')
+}
+```
+
+When using maven, add a dependency in test scope.
+
+```
+<dependency>
+	<groupId>com.epages</groupId>
+	<artifactId>restdocs-wiremock</artifactId>
+	<version>0.5.1</version>
+        <scope>test</scope>
+</dependency>
+```
+
+
+## How to run the provided examples
+
+1. Publish the restdocs-wiremock artifact into your `mavenLocal`.
 
 
 ```shell
 ./gradlew restdocs-wiremock:publishToMavenLocal
 ```
 
-You should have `restdocs-wiremock-0.2` in your maven repository:
+You should have `restdocs-wiremock-0.5.1` in your maven repository:
 
 ```shell
- ls ~/.m2/repository/com/github/otrosien/restdocs-wiremock/0.2/
-restdocs-wiremock-0.2.jar  restdocs-wiremock-0.1.pom
+ ls ~/.m2/repository/com/github/otrosien/restdocs-wiremock/0.5.1/
+restdocs-wiremock-0.5.1.jar  restdocs-wiremock-0.1.pom
 ```
 
 2. Run the server tests, which uses the WireMock integration into Spring REST Docs.
@@ -42,8 +65,8 @@ restdocs-wiremock-0.2.jar  restdocs-wiremock-0.1.pom
 As a result, there is a `restdocs-server-wiremock` jar file in your maven repository:
 
 ```shell
-ls ~/.m2/repository/com/github/otrosien/restdocs-server/0.2/
-restdocs-server-0.2-wiremock.jar
+ls ~/.m2/repository/com/github/otrosien/restdocs-server/0.5.1/
+restdocs-server-0.5.1-wiremock.jar
 ```
 
 Mind that this jar only contains a set of json files without explicit dependency on WireMock itself. 
