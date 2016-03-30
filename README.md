@@ -35,7 +35,7 @@ When using maven, add a dependency in test scope.
 	<groupId>com.epages</groupId>
 	<artifactId>restdocs-wiremock</artifactId>
 	<version>0.5.1</version>
-        <scope>test</scope>
+	<scope>test</scope>
 </dependency>
 ```
 
