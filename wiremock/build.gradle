@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.springframework.restdocs:spring-restdocs-mockmvc:1.1.0.M1'
+    compile 'org.springframework.restdocs:spring-restdocs-mockmvc:1.1.0.RC1'
     compile 'junit:junit:4.12'
     compile 'com.google.guava:guava:19.0'
 }
@@ -21,7 +21,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 group = 'com.epages'
-version = '0.5.1'
+version = '0.5.2'
 
 description = 'Adds wiremock stub snippets to Spring REST Docs'
 

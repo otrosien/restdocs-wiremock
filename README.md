@@ -24,7 +24,7 @@ When using gradle, add a testCompile dependency.
 
 ```
 dependencies {
-  testCompile('com.epages:restdocs-wiremock:0.5.1')
+  testCompile('com.epages:restdocs-wiremock:0.5.2')
 }
 ```
 
@@ -34,7 +34,7 @@ When using maven, add a dependency in test scope.
 <dependency>
 	<groupId>com.epages</groupId>
 	<artifactId>restdocs-wiremock</artifactId>
-	<version>0.5.1</version>
+	<version>0.5.2</version>
 	<scope>test</scope>
 </dependency>
 ```
@@ -49,11 +49,11 @@ When using maven, add a dependency in test scope.
 ./gradlew restdocs-wiremock:publishToMavenLocal
 ```
 
-You should have `restdocs-wiremock-0.5.1` in your maven repository:
+You should have `restdocs-wiremock-0.5.2` in your maven repository:
 
 ```shell
- ls ~/.m2/repository/com/epages/restdocs-wiremock/0.5.1/
-restdocs-wiremock-0.5.1.jar  restdocs-wiremock-0.1.pom
+ ls ~/.m2/repository/com/epages/restdocs-wiremock/0.5.2/
+restdocs-wiremock-0.5.2.jar  restdocs-wiremock-0.1.pom
 ```
 
 2. Run the server tests, which uses the WireMock integration into Spring REST Docs.
@@ -65,8 +65,8 @@ restdocs-wiremock-0.5.1.jar  restdocs-wiremock-0.1.pom
 As a result, there is a `restdocs-server-wiremock` jar file in your maven repository:
 
 ```shell
-ls ~/.m2/repository/com/epages/restdocs-server/0.5.1/
-restdocs-server-0.5.1-wiremock.jar
+ls ~/.m2/repository/com/epages/restdocs-server/0.5.2/
+restdocs-server-0.5.2-wiremock.jar
 ```
 
 Mind that this jar only contains a set of json files without explicit dependency on WireMock itself. 
