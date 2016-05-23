@@ -1,6 +1,7 @@
 # Spring REST Docs and WireMock Integration
 
 [![Build Status](https://travis-ci.org/ePages-de/restdocs-wiremock.png)](https://travis-ci.org/ePages-de/restdocs-wiremock)
+[ ![Download](https://api.bintray.com/packages/epages/maven/restdocs-wiremock/images/download.svg) ](https://bintray.com/epages/maven/restdocs-wiremock/_latestVersion)
 
 This is a sample of how to auto-generate [WireMock](http://wiremock.org/) stubs
 as part of documenting your REST API with [Spring REST Docs](http://projects.spring.io/spring-restdocs/).
