@@ -51,8 +51,10 @@ Integration into your test code is as simple as replacing the `andDo(document())
 `andDo(documentWithWireMock())` from `com.epages.restdocs.WireMockDocumentation`. For example:
 
 ```java
+@RunWith(SpringRunner.class)
 class ApiDocumentation {
-    void testIndex() {
+    // ... just the usual test setup.
+    void testGetSingleNote() {
         this.mockMvc.perform(get("/notes/1").accept(MediaType.APPLICATION_JSON)) 
         .andExpect(status().isOk()) 
         .andDo(documentWithWireMock("get-note"));
