@@ -45,9 +45,23 @@ When using maven, add a dependency in test scope.
 ## How does it look like?
 
 During REST Docs run, snippets like the one below are generated and put into a dedicated jar file, which you can
-publish into your artifact repository. The snippet below registers a `200 OK` response to `/notes/1` URL path, with
-the response body as provided by the integration test on the server. 
+publish into your artifact repository. 
 
+Integration into your test code is as simple as replacing the `andDo(document())` calls with
+`andDo(documentWithWireMock())` from `com.epages.restdocs.WireMockDocumentation`. For example:
+
+```java
+class ApiDocumentation {
+    void testIndex() {
+        this.mockMvc.perform(get("/notes/1").accept(MediaType.APPLICATION_JSON)) 
+        .andExpect(status().isOk()) 
+        .andDo(documentWithWireMock("get-note"));
+    }
+}
+```
+
+The snippet below is the resulting snippet of a `200 OK` response to `/notes/1`, with
+the response body as provided by the integration test.
 
 ```json
 {
@@ -63,6 +77,7 @@ the response body as provided by the integration test on the server.
     },
     "body" : "{\n  \"title\" : \"REST maturity model\",\n  \"body\" : \"http://martinfowler.com/articles/richardsonMaturityModel.html\",\n  \"_links\" : {\n    \"self\" : {\n      \"href\" : \"http://localhost:8080/notes/1\"\n    },\n    \"note\" : {\n      \"href\" : \"http://localhost:8080/notes/1\"\n    },\n    \"tags\" : {\n      \"href\" : \"http://localhost:8080/notes/1/tags\"\n    }\n  }\n}"
   }
+}
 ```
 
 
