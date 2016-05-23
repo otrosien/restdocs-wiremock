@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/ePages-de/restdocs-wiremock.png)](https://travis-ci.org/ePages-de/restdocs-wiremock)
 [ ![Download](https://api.bintray.com/packages/epages/maven/restdocs-wiremock/images/download.svg) ](https://bintray.com/epages/maven/restdocs-wiremock/_latestVersion)
 
-This is a sample of how to auto-generate [WireMock](http://wiremock.org/) stubs
+This is a REST Docs plugin for auto-generating [WireMock](http://wiremock.org/) stubs
 as part of documenting your REST API with [Spring REST Docs](http://projects.spring.io/spring-restdocs/).
 
 The basic idea is to use the requests and responses from the test cases as mock templates for re-use 
@@ -43,7 +43,9 @@ When using maven, add a dependency in test scope.
 ## How does it look like?
 
 During REST Docs run, snippets like the one below are generated and put into a dedicated jar file, which you can
-publish into your artifact repository.
+publish into your artifact repository. The snippet below registers a `200 OK` response to `/notes/1` URL path, with
+the response body as provided by the integration test on the server. 
+
 
 ```json
 {
