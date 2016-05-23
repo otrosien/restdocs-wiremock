@@ -40,6 +40,27 @@ When using maven, add a dependency in test scope.
 </dependency>
 ```
 
+## How does it look like?
+
+During REST Docs run, snippets like the one below are generated and put into a dedicated jar file, which you can
+publish into your artifact repository.
+
+```json
+{
+  "request" : {
+    "method" : "GET",
+    "urlPath" : "/notes/1"
+  },
+  "response" : {
+    "status" : 200,
+    "headers" : {
+      "Content-Type" : [ "application/hal+json" ],
+      "Content-Length" : [ "344" ]
+    },
+    "body" : "{\n  \"title\" : \"REST maturity model\",\n  \"body\" : \"http://martinfowler.com/articles/richardsonMaturityModel.html\",\n  \"_links\" : {\n    \"self\" : {\n      \"href\" : \"http://localhost:8080/notes/1\"\n    },\n    \"note\" : {\n      \"href\" : \"http://localhost:8080/notes/1\"\n    },\n    \"tags\" : {\n      \"href\" : \"http://localhost:8080/notes/1/tags\"\n    }\n  }\n}"
+  }
+```
+
 
 ## How to run the provided examples
 
