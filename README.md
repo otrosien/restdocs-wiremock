@@ -64,7 +64,7 @@ the response body as provided by the integration test on the server.
 ```
 
 
-## How to run and test the provided examples
+## Building from source
 
 ### Publish the current restdocs-wiremock library code into your `mavenLocal`.
 
