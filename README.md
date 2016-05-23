@@ -1,4 +1,4 @@
-# Spring REST Docs and WireMock Integration
+# Spring REST Docs WireMock Integration
 
 [![Build Status](https://travis-ci.org/ePages-de/restdocs-wiremock.png)](https://travis-ci.org/ePages-de/restdocs-wiremock)
 [ ![Download](https://api.bintray.com/packages/epages/maven/restdocs-wiremock/images/download.svg) ](https://bintray.com/epages/maven/restdocs-wiremock/_latestVersion)
