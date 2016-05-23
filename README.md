@@ -62,20 +62,20 @@ publish into your artifact repository.
 ```
 
 
-## How to run the provided examples
+## How to run and test the provided examples
 
-1. Publish the restdocs-wiremock artifact into your `mavenLocal`.
+1. Publish the current restdocs-wiremock library code into your `mavenLocal`.
 
 
 ```shell
 ./gradlew restdocs-wiremock:publishToMavenLocal
 ```
 
-You should have `restdocs-wiremock-0.5.2` in your maven repository:
+You should have `restdocs-wiremock-0.5.3-SNAPSHOT` in your maven repository:
 
 ```shell
- ls ~/.m2/repository/com/epages/restdocs-wiremock/0.5.2/
-restdocs-wiremock-0.5.2.jar  restdocs-wiremock-0.5.2.pom
+ ls ~/.m2/repository/com/epages/restdocs-wiremock/0.5.3-SNAPSHOT/
+restdocs-wiremock-0.5.3-SNAPSHOT.jar  restdocs-wiremock-0.5.3-SNAPSHOT.pom
 ```
 
 2. Run the server tests, which uses the WireMock integration into Spring REST Docs.
@@ -87,8 +87,8 @@ restdocs-wiremock-0.5.2.jar  restdocs-wiremock-0.5.2.pom
 As a result, there is a `restdocs-server-wiremock` jar file in your maven repository:
 
 ```shell
-ls ~/.m2/repository/com/epages/restdocs-server/0.5.2/
-restdocs-server-0.5.2-wiremock.jar
+ls ~/.m2/repository/com/epages/restdocs-server/0.5.3-SNAPSHOT/
+restdocs-server-0.5.3-SNAPSHOT-wiremock.jar
 ```
 
 Mind that this jar only contains a set of json files without explicit dependency on WireMock itself. 

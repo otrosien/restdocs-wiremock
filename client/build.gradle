@@ -34,7 +34,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 group = 'com.epages'
-version = "0.5.2"
+version = "0.5.3-SNAPSHOT"
 
 assemble.dependsOn(':restdocs-server:publishToMavenLocal')
 compileJava.dependsOn(':restdocs-server:publishToMavenLocal')
