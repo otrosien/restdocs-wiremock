@@ -21,7 +21,9 @@ This repository contains three projects
 
 ## How to include `restdocs-wiremock` into your project
 
-When using gradle, add a testCompile dependency.
+The project is published on `jcenter` from bintray, so firstly, you need to add `jcenter` as package repository for your project.
+
+Then, when using gradle, add a testCompile dependency.
 
 ```
 dependencies {
