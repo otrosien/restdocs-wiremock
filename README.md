@@ -54,7 +54,7 @@ You should have `restdocs-wiremock-0.5.2` in your maven repository:
 
 ```shell
  ls ~/.m2/repository/com/epages/restdocs-wiremock/0.5.2/
-restdocs-wiremock-0.5.2.jar  restdocs-wiremock-0.1.pom
+restdocs-wiremock-0.5.2.jar  restdocs-wiremock-0.5.2.pom
 ```
 
 2. Run the server tests, which uses the WireMock integration into Spring REST Docs.
