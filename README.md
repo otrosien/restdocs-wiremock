@@ -66,8 +66,7 @@ the response body as provided by the integration test on the server.
 
 ## How to run and test the provided examples
 
-1. Publish the current restdocs-wiremock library code into your `mavenLocal`.
-
+### Publish the current restdocs-wiremock library code into your `mavenLocal`.
 
 ```shell
 ./gradlew restdocs-wiremock:publishToMavenLocal
@@ -80,7 +79,7 @@ You should have `restdocs-wiremock-0.5.3-SNAPSHOT` in your maven repository:
 restdocs-wiremock-0.5.3-SNAPSHOT.jar  restdocs-wiremock-0.5.3-SNAPSHOT.pom
 ```
 
-2. Run the server tests, which uses the WireMock integration into Spring REST Docs.
+###  Run the server tests, which uses the WireMock integration into Spring REST Docs.
 
 ```shell
 ./gradlew restdocs-server:build restdocs-server:publishToMavenLocal
@@ -95,9 +94,9 @@ restdocs-server-0.5.3-SNAPSHOT-wiremock.jar
 
 Mind that this jar only contains a set of json files without explicit dependency on WireMock itself. 
 
-3. Run the client tests, that expect a specific API from the server. By mocking a server
-via WireMock the client can be tested in isolation, but would notice a breaking change.
+###  Run the client tests, that expect a specific API from the server. 
 
+By mocking a server via WireMock the client can be tested in isolation, but would notice a breaking change.
 
 ```shell
 ./gradlew restdocs-client:build
