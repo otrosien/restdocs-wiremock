@@ -17,4 +17,6 @@ scmVersion {
     }
 }
 
-project.version = scmVersion.version
+allprojects {
+    project.version = scmVersion.version
+}
