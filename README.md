@@ -85,40 +85,23 @@ the response body as provided by the integration test.
 
 ## Building from source
 
-### Publish the current restdocs-wiremock library code into your `mavenLocal`.
+1. Publish the current restdocs-wiremock library code into your `mavenLocal`.
 
-```shell
-./gradlew restdocs-wiremock:publishToMavenLocal
-```
+  ```shell
+  ./gradlew restdocs-wiremock:build restdocs-wiremock:publishToMavenLocal
+  ```
 
-You should have `restdocs-wiremock-0.5.6-SNAPSHOT` in your maven repository:
+2.  Run the server tests, which uses the WireMock integration into Spring REST Docs. 
+    As a result, there is a `restdocs-server-wiremock` jar file in your maven repository.
+    Mind that this jar only contains a set of json files without explicit dependency on WireMock itself. 
 
-```shell
- ls ~/.m2/repository/com/epages/restdocs-wiremock/0.5.6-SNAPSHOT/
-restdocs-wiremock-0.5.6-SNAPSHOT.jar  restdocs-wiremock-0.5.6-SNAPSHOT.pom
-```
+  ```shell
+  ./gradlew restdocs-server:build restdocs-server:publishToMavenLocal
+  ```
 
-###  Run the server tests, which uses the WireMock integration into Spring REST Docs.
+3. Run the client tests, that expect a specific API from the server. 
+   By mocking a server via WireMock the client can be tested in isolation, but would notice a breaking change.
 
-```shell
-./gradlew restdocs-server:build restdocs-server:publishToMavenLocal
-```
-
-As a result, there is a `restdocs-server-wiremock` jar file in your maven repository:
-
-```shell
-ls ~/.m2/repository/com/epages/restdocs-server/0.5.6-SNAPSHOT/
-restdocs-server-0.5.6-SNAPSHOT-wiremock.jar
-```
-
-Mind that this jar only contains a set of json files without explicit dependency on WireMock itself. 
-
-###  Run the client tests, that expect a specific API from the server. 
-
-By mocking a server via WireMock the client can be tested in isolation, but would notice a breaking change.
-
-```shell
-./gradlew restdocs-client:build
-```
-
-	
+  ```shell
+  ./gradlew restdocs-client:build
+  ```
