@@ -34,7 +34,6 @@ publishing {
             from components.java
             artifactId 'restdocs-wiremock'
             groupId = project.group
-            version = project.version
         }
         sourceJar(MavenPublication) {
             from components.java
@@ -57,6 +56,8 @@ bintray {
         websiteUrl = 'https://github.com/ePages-de/restdocs-wiremock'
         issueTrackerUrl = 'https://github.com/ePages-de/restdocs-wiremock/issues'
         vcsUrl = 'https://github.com/ePages-de/restdocs-wiremock.git'
+        githubRepo = 'ePages-de/restdocs-wiremock'
+        githubReleaseNotesFile = 'README.md'
         licenses = ['Apache-2.0']
     }
 }
