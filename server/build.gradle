@@ -26,6 +26,7 @@ repositories {
 }
 
 group = 'com.epages'
+version = rootProject.version
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
