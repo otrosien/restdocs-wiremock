@@ -27,7 +27,7 @@ dependencies {
     testCompile('junit:junit:4.12')
     testCompile('com.github.tomakehurst:wiremock:2.0.10-beta')
     testCompile 'org.springframework.boot:spring-boot-starter-test'
-    testRuntime (group:'com.epages', name:'restdocs-server', version:"${project.version}", classifier:'wiremock', ext:'jar', changing: true)
+    testRuntime (group:'com.epages', name:'restdocs-server', version:"${rootProject.version}", classifier:'wiremock', ext:'jar', changing: true)
 }
 
 sourceCompatibility = 1.8
