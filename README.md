@@ -27,7 +27,7 @@ Then, when using gradle, add a testCompile dependency.
 
 ```
 dependencies {
-  testCompile('com.epages:restdocs-wiremock:0.5.3')
+  testCompile('com.epages:restdocs-wiremock:0.5.4')
 }
 ```
 
@@ -37,7 +37,7 @@ When using maven, add a dependency in test scope.
 <dependency>
 	<groupId>com.epages</groupId>
 	<artifactId>restdocs-wiremock</artifactId>
-	<version>0.5.3</version>
+	<version>0.5.4</version>
 	<scope>test</scope>
 </dependency>
 ```
