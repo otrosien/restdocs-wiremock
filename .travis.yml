@@ -7,11 +7,7 @@ cache:
   - "$HOME/.gradle"
 script: "./gradlew clean build"
 deploy:
-  before_deploy: 
-    - "./gradlew clean verifyRelease"
-  deploy: 
-    - "./gradlew release"
-    - "./gradlew clean publish"
+  deploy: "./gradlew verifyRelease publish"
   on:
     tags: true
 env:
