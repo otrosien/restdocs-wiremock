@@ -10,7 +10,7 @@ import org.springframework.restdocs.RestDocumentationContext;
 import org.springframework.restdocs.operation.Operation;
 import org.springframework.restdocs.operation.OperationRequest;
 import org.springframework.restdocs.operation.OperationResponse;
-import org.springframework.restdocs.snippet.RestDocumentationContextPlaceholderResolver;
+import org.springframework.restdocs.snippet.RestDocumentationContextPlaceholderResolverFactory;
 import org.springframework.restdocs.snippet.Snippet;
 import org.springframework.restdocs.snippet.StandardWriterResolver;
 import org.springframework.restdocs.snippet.WriterResolver;
@@ -45,7 +45,7 @@ final class WireMockJsonSnippet implements Snippet {
 		RestDocumentationContext context = (RestDocumentationContext) operation.getAttributes()
 				.get(RestDocumentationContext.class.getName());
 		WriterResolver writerResolver = new StandardWriterResolver(
-				new RestDocumentationContextPlaceholderResolver(context), "UTF-8", TEMPLATE_FORMAT);
+				new RestDocumentationContextPlaceholderResolverFactory(), "UTF-8", TEMPLATE_FORMAT);
 		try (Writer writer = writerResolver.resolve(operation.getName(), SNIPPET_NAME, context)) {
 			writer.append(toJsonString(operation));
 		}
