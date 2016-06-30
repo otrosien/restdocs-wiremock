@@ -16,7 +16,9 @@ import org.springframework.restdocs.snippet.Snippet;
 
 /**
  * Wrapper around the static API from {@link MockMvcRestDocumentation}, to
- * integrate generation of WireMock stubs.
+ * integrate generation of WireMock stubs. Most of the static API is deprecated.
+ * Please use {@link MockMvcRestDocumentation#document(String, Snippet...)} in
+ * combination with {@link WireMockDocumentation#wiremockJson()}.
  */
 public final class WireMockDocumentation {
 
@@ -28,7 +30,12 @@ public final class WireMockDocumentation {
 	 * 
 	 * @return a Mock MVC {@code ResultHandler} that will produce the
 	 *         documentation
+	 * @deprecated Since 0.6.4 in favour of using
+	 *             {@link MockMvcRestDocumentation#document(String, Snippet...)}
+	 *             in combination with
+	 *             {@link WireMockDocumentation#wiremockJson()}
 	 */
+	@Deprecated
 	public static RestDocumentationResultHandler documentWithWireMock() {
 		return documentWithWireMock("{method-name}_{step}");
 	}
@@ -43,7 +50,12 @@ public final class WireMockDocumentation {
 	 *            the snippets
 	 * @return a Mock MVC {@code ResultHandler} that will produce the
 	 *         documentation
+	 * @deprecated Since 0.6.4 in favour of using
+	 *             {@link MockMvcRestDocumentation#document(String, Snippet...)}
+	 *             in combination with
+	 *             {@link WireMockDocumentation#wiremockJson()}
 	 */
+	@Deprecated
 	public static RestDocumentationResultHandler documentWithWireMock(String identifier, Snippet... snippets) {
 		return documentWithWireMock(identifier).snippets(snippets);
 	}
@@ -59,7 +71,12 @@ public final class WireMockDocumentation {
 	 *            an identifier for the API call that is being documented
 	 * @return a Mock MVC {@code ResultHandler} that will produce the
 	 *         documentation
+	 * @deprecated Since 0.6.4 in favour of using
+	 *             {@link MockMvcRestDocumentation#document(String, Snippet...)}
+	 *             in combination with
+	 *             {@link WireMockDocumentation#wiremockJson()}
 	 */
+	@Deprecated
 	public static RestDocumentationResultHandler documentWithWireMock(String identifier) {
 		return documentWithWireMock(identifier, preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()))
 				.snippets(curlRequest(), httpRequest(), httpResponse(), wiremockJson());
@@ -77,7 +94,12 @@ public final class WireMockDocumentation {
 	 *            a request preprocessor
 	 * @return a Mock MVC {@code ResultHandler} that will produce the
 	 *         documentation
+	 * @deprecated Since 0.6.4 in favour of using
+	 *             {@link MockMvcRestDocumentation#document(String, Snippet...)}
+	 *             in combination with
+	 *             {@link WireMockDocumentation#wiremockJson()}
 	 */
+	@Deprecated
 	public static RestDocumentationResultHandler documentWithWireMock(String identifier, OperationRequestPreprocessor requestPreprocessor, Snippet... snippets) {
 		return documentWithWireMock(identifier, requestPreprocessor, preprocessResponse(prettyPrint())).snippets(snippets);
 	}
@@ -90,11 +112,16 @@ public final class WireMockDocumentation {
 	 *      Snippet...)
 	 * @param identifier
 	 *            an identifier for the API call that is being documented
-	 * @param response preprocessor,
-	 *            a response preprocessor
+	 * @param response
+	 *            preprocessor, a response preprocessor
 	 * @return a Mock MVC {@code ResultHandler} that will produce the
 	 *         documentation
+	 * @deprecated Since 0.6.4 in favour of using
+	 *             {@link MockMvcRestDocumentation#document(String, Snippet...)}
+	 *             in combination with
+	 *             {@link WireMockDocumentation#wiremockJson()}
 	 */
+	@Deprecated
 	public static RestDocumentationResultHandler documentWithWireMock(String identifier, OperationResponsePreprocessor responsePreprocessor, Snippet... snippets) {
 		return documentWithWireMock(identifier, preprocessRequest(prettyPrint()), responsePreprocessor).snippets(snippets);
 	}
@@ -114,14 +141,21 @@ public final class WireMockDocumentation {
 	 *            a response preprocessor
 	 * @return a Mock MVC {@code ResultHandler} that will produce the
 	 *         documentation
+	 * @deprecated Since 0.6.4 in favour of using
+	 *             {@link MockMvcRestDocumentation#document(String, Snippet...)}
+	 *             in combination with
+	 *             {@link WireMockDocumentation#wiremockJson()}
 	 */
+	@Deprecated
 	public static RestDocumentationResultHandler documentWithWireMock(String identifier, OperationRequestPreprocessor requestPreprocessor, OperationResponsePreprocessor responsePreprocessor, Snippet... snippets) {
 		return document(identifier, requestPreprocessor, responsePreprocessor).snippets(snippets);
 	}
 
 	/**
-	 * Returns a json {@code Snippet} that will generate the wiremock stub from the API operation.
+	 * Returns a json {@code Snippet} that will generate the WireMock stub from
+	 * the API operation.
 	 *
+	 * @see {@see MockMvcRestDocumentation}
 	 * @return the json snippet
 	 */
 	public static Snippet wiremockJson() {

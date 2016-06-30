@@ -16,11 +16,12 @@
 
 package com.example.notes;
 
-import static com.epages.restdocs.WireMockDocumentation.documentWithWireMock;
+import static com.epages.restdocs.WireMockDocumentation.wiremockJson;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.patch;
@@ -55,7 +56,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.epages.restdocs.RestDocumentation;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -66,9 +66,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ApiDocumentation {
 	
 	@Rule
-	// custom
-	public final JUnitRestDocumentation restDocumentation = RestDocumentation.usingGradleDir();
-	// end custom
+	public final JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("build/generated-snippets");
 
 	@Autowired
 	private NoteRepository noteRepository;
@@ -104,7 +102,7 @@ public class ApiDocumentation {
 				.andExpect(jsonPath("timestamp", is(notNullValue())))
 				.andExpect(jsonPath("status", is(400)))
 				.andExpect(jsonPath("path", is(notNullValue())))
-				.andDo(documentWithWireMock("error-example",
+				.andDo(document("error-example", wiremockJson(),
 						responseFields(
 								fieldWithPath("error").description("The HTTP error that occurred, e.g. `Bad Request`"),
 								fieldWithPath("message").description("A description of the cause of the error"),
@@ -118,7 +116,7 @@ public class ApiDocumentation {
 		this.mockMvc.perform(get("/"))
 			.andExpect(status().isOk())
 			// custom
-			.andDo(documentWithWireMock("index-example",
+				.andDo(document("index-example", wiremockJson(),
 			// custom end
 					links(
 							linkWithRel("notes").description("The <<resources-notes,Notes resource>>"),
@@ -142,7 +140,8 @@ public class ApiDocumentation {
 		this.mockMvc.perform(get("/notes"))
 			.andExpect(status().isOk())
 			// custom
-			.andDo(documentWithWireMock("notes-list-example",
+				.andDo(document("notes-list-example", wiremockJson(),
+
 			// custom end
 					responseFields(
 							fieldWithPath("_links").description("<<resources-index-links,Links>> to other resources"),
@@ -171,7 +170,7 @@ public class ApiDocumentation {
 						this.objectMapper.writeValueAsString(note))).andExpect(
 				status().isCreated())
 				// custom
-				.andDo(documentWithWireMock("notes-create-example",
+				.andDo(document("notes-create-example", wiremockJson(),
 				// custom end
 						requestFields(
 									fieldWithPath("title").description("The title of the note"),
@@ -210,7 +209,7 @@ public class ApiDocumentation {
 			.andExpect(jsonPath("_links.self.href", is(noteLocation)))
 			.andExpect(jsonPath("_links.tags", is(notNullValue())))
 			// custom
-			.andDo(documentWithWireMock("note-get-example",
+				.andDo(document("note-get-example", wiremockJson(),
 			// custom end
 					links(
 							linkWithRel("self").description("This <<resources-note,note>>"),
@@ -226,7 +225,7 @@ public class ApiDocumentation {
 	public void noteBadRequestExample() throws Exception {
 
 		this.mockMvc.perform(get("/notes/xy")).andExpect(status().isBadRequest())
-				.andDo(documentWithWireMock("note-badrequest-example"));
+				.andDo(document("note-badrequest-example", wiremockJson()));
 	}
 
 	@Test
@@ -241,7 +240,7 @@ public class ApiDocumentation {
 		this.mockMvc.perform(get("/tags"))
 			.andExpect(status().isOk())
 			// custom
-			.andDo(documentWithWireMock("tags-list-example",
+				.andDo(document("tags-list-example", wiremockJson(),
 			// custom end
 					responseFields(
 							fieldWithPath("_links").description("<<resources-note-links,Links>> to other resources"),
@@ -258,7 +257,7 @@ public class ApiDocumentation {
 						this.objectMapper.writeValueAsString(tag)))
 				.andExpect(status().isCreated())
 				// custom
-				.andDo(documentWithWireMock("tags-create-example",
+				.andDo(document("tags-create-example", wiremockJson(),
 				// custom end
 						requestFields(
 								fieldWithPath("name").description("The name of the tag"))));
@@ -301,7 +300,7 @@ public class ApiDocumentation {
 						this.objectMapper.writeValueAsString(noteUpdate)))
 				.andExpect(status().isNoContent())
 				// custom
-				.andDo(documentWithWireMock("note-update-example",
+				.andDo(document("note-update-example", wiremockJson(),
 				// custom end
 						requestFields(
 								fieldWithPath("title").description("The title of the note").type(JsonFieldType.STRING).optional(),
@@ -325,7 +324,7 @@ public class ApiDocumentation {
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("name", is(tag.get("name"))))
 			// custom
-			.andDo(documentWithWireMock("tag-get-example",
+				.andDo(document("tag-get-example", wiremockJson(),
 			// custom end
 					links(
 							linkWithRel("self").description("This <<resources-tag,tag>>"),
@@ -356,7 +355,7 @@ public class ApiDocumentation {
 						this.objectMapper.writeValueAsString(tagUpdate)))
 				.andExpect(status().isNoContent())
 				// custom
-				.andDo(documentWithWireMock("tag-update-example",
+				.andDo(document("tag-update-example", wiremockJson(),
 				// custom end
 						requestFields(
 								fieldWithPath("name").description("The name of the tag"))));
