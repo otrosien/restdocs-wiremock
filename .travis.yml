@@ -5,7 +5,7 @@ sudo: false
 cache:
   directories:
   - "$HOME/.gradle"
-script: "./gradlew restdocs-server:build restdocs-client:build"
+script: "./gradlew clean build"
 deploy:
   before_deploy: 
     - "./gradlew clean verifyRelease"
