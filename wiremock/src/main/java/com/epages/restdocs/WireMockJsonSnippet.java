@@ -2,8 +2,9 @@ package com.epages.restdocs;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.restdocs.RestDocumentationContext;
 import org.springframework.restdocs.operation.Operation;
@@ -18,7 +19,6 @@ import org.springframework.restdocs.templates.TemplateFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.google.common.collect.ImmutableMap;
 
 final class WireMockJsonSnippet implements Snippet {
 
@@ -55,14 +55,14 @@ final class WireMockJsonSnippet implements Snippet {
 		return new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT).writeValueAsString(createModel(operation));
 	}
 
-	protected ImmutableMap<Object, Object> createModel(Operation operation) {
+	protected Map<Object, Object> createModel(Operation operation) {
 		OperationResponse response = operation.getResponse();
 
-		ImmutableMap.Builder<Object, Object> requestBuilder = ImmutableMap.builder()
+		Maps.Builder<Object, Object> requestBuilder = Maps.builder()
 				.put("method", operation.getRequest().getMethod())
 				.put("urlPath", operation.getRequest().getUri().getRawPath());
 
-		ImmutableMap.Builder<Object, Object> responseBuilder = ImmutableMap.builder()
+		Maps.Builder<Object, Object> responseBuilder = Maps.builder()
 				.put("status", response.getStatus().value()).put("headers", response.getHeaders())
 				.put("body", responseBody(response));
 
@@ -76,13 +76,18 @@ final class WireMockJsonSnippet implements Snippet {
 			requestBuilder.put("headers", headers);
 		}
 
-		return ImmutableMap.builder().put("request", requestBuilder.build()).put("response", responseBuilder.build())
+		return Maps.builder().put("request", requestBuilder.build()).put("response", responseBuilder.build())
 				.build();
 	}
 
 	private Map<Object, Object> queryParams(Operation operation) {
-		return operation.getRequest().getParameters().entrySet().stream().collect(
-				Collectors.toMap(e -> e.getKey().toString(), e -> ImmutableMap.of("equalTo", e.getValue().get(0))));
+		Maps.Builder<Object, Object> queryParams = Maps.builder();
+
+		for (Map.Entry<String, List<String>> e : operation.getRequest().getParameters().entrySet()) {
+			queryParams.put(e.getKey(), Maps.of("equalTo", e.getValue().get(0)));
+		}
+
+		return queryParams.build();
 	}
 
 	private String responseBody(OperationResponse response) {
@@ -90,11 +95,42 @@ final class WireMockJsonSnippet implements Snippet {
 	}
 
 	private Map<Object, Object> requestHeaders(OperationRequest request) {
-		return request.getHeaders().entrySet().stream()
-				.filter(e -> "content-type".equalsIgnoreCase(e.getKey()) || "accept".equalsIgnoreCase(e.getKey()))
-				.collect(Collectors.toMap(e -> e.getKey().toString(),
-						e -> ImmutableMap.of("equalTo", e.getValue().get(0))));
+		Maps.Builder<Object, Object> requestHeaders = Maps.builder();
+		for (Map.Entry<String, List<String>> e : request.getHeaders().entrySet()) {
+			if ("content-type".equalsIgnoreCase(e.getKey()) || "accept".equalsIgnoreCase(e.getKey())) {
+				requestHeaders.put(e.getKey(), Maps.of("equalTo", e.getValue().get(0)));
+			}
+		}
+		return requestHeaders.build();
+	}
 
+	static class Maps {
+		static <K, V> Map<K, V> of(K k1, V v1) {
+			HashMap<K, V> map = new HashMap<>();
+			map.put(k1, v1);
+			return map;
+		}
+
+		static <K, V> Builder<K, V> builder() {
+			return new Builder<>();
+		}
+
+		static class Builder<K, V> {
+			private final Map<K, V> map;
+
+			public Builder() {
+				map = new HashMap<>();
+			}
+
+			Builder<K, V> put(K k, V v) {
+				map.put(k, v);
+				return this;
+			}
+
+			Map<K, V> build() {
+				return map;
+			}
+		}
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.epages.restdocs;
 
-import org.junit.rules.TestRule;
 import org.springframework.restdocs.JUnitRestDocumentation;
 
 /**
