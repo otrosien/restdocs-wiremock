@@ -1,6 +1,7 @@
 include 'wiremock'
 include 'server'
 include 'client'
+include 'wiremock-spring-boot-starter'
 
 rootProject.name = 'restdocs-wiremock-parent'
 

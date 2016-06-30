@@ -55,8 +55,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.epages.restdocs.RestDocumentation;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = RestNotesSpringDataRest.class)
@@ -220,6 +220,13 @@ public class ApiDocumentation {
 							fieldWithPath("title").description("The title of the note"),
 							fieldWithPath("body").description("The body of the note"),
 							fieldWithPath("_links").description("<<resources-note-links,Links>> to other resources"))));
+	}
+
+	@Test
+	public void noteBadRequestExample() throws Exception {
+
+		this.mockMvc.perform(get("/notes/xy")).andExpect(status().isBadRequest())
+				.andDo(documentWithWireMock("note-badrequest-example"));
 	}
 
 	@Test
