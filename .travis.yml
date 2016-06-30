@@ -6,10 +6,8 @@ cache:
   directories:
   - "$HOME/.gradle"
 script: "./gradlew clean build"
-deploy:
-  deploy: "./gradlew verifyRelease publish"
-  on:
-    tags: true
+after_success:
+  - "$(./gradlew currentVersion | grep -q SNAPSHOT) || ./gradlew publish"
 env:
   global:
   - secure: aXvVvRG8Q5cHebFbxetzlnIRIq7Dk8BPn6U9qp41X6Ck8QhH5KVhEGsozybwxt1sGofj+ibZfpOnBOM5ctqxRTZjlVc97HyZiv6aoa8RePqIr3a7WObPGuPqlL93LK/AXOtoDZxTMn2+EwM5UMi9T3gpCj1JElMa8hfbSxElflgzvJKhNbK9a8hm4VvsLgA5+7tuop1KOu/BQwX9dDcCWyNvE/fZYgkthY5mpgvyKFllEd3ziUqcuawt0Ap3/tTJo9GEe8WwFvo8kyulIy70JhiqURXHbzvQdE83VEvYVbV+oH2d2E5lcGLL47g3/Y74dFHMQvuXi2jHdzKIKTUyCkAEu8oOd+UreSp7RhWdVCe3vrv3VZLpgHdnJt1j3LUEktXbRs90FEikSPEBk0DFqBiB3ZZIZsb0Qka3ASsmjXeMPznzSDNTglqlwK2nBxBeh2scf+asOxATYhcMr10W4yKtoeIZoa91WJdG4bjHUutTyGFUd6xdj4+qgTxbjpdmTZ46PmFmikdp4TWYKvtNBPbGsAew4HmSlxFylv/WyLtvP4paM9A83UsTjIPo3Ly3vWtGh9kLd7pRABqO9xv2OVpWN6D6038WOCc23GpNL99kvgjQxu8CzS0WVFLJ7g2ajD/ZRRZGpBmnMkwUFiu5rdS1/YBqM8nr/XOKs4mC9VY=
