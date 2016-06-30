@@ -208,4 +208,13 @@ It is possible to read-in a different mapping for each test, by repeating the `@
   
 ## Publishing
 
-This project makes use of the [axion-release-plugin](https://github.com/allegro/axion-release-plugin). 
+This project makes use of the [axion-release-plugin](https://github.com/allegro/axion-release-plugin). Releasing consists
+of the following steps:
+
+```
+./gradlew clean build
+./gradlew clean
+./gradlew release
+./gradlew publish
+./gradlew markNextVersion -Prelease.nextVersion=x.y.z
+```
