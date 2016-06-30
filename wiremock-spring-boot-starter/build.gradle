@@ -12,6 +12,7 @@ plugins {
     id 'maven'
     id 'maven-publish'
     id 'eclipse'
+    id "com.jfrog.bintray" version '1.6'
 }
 
 apply plugin: 'spring-boot'
@@ -48,4 +49,22 @@ publishing {
             }
         }
     }
+}
+
+bintray {
+	user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+	key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+	publications = ['mavenJava','sourceJar']
+	publish = true
+	pkg {
+		repo = "maven"
+		name = 'restdocs-wiremock'
+		userOrg = 'epages'
+		websiteUrl = 'https://github.com/ePages-de/restdocs-wiremock'
+		issueTrackerUrl = 'https://github.com/ePages-de/restdocs-wiremock/issues'
+		vcsUrl = 'https://github.com/ePages-de/restdocs-wiremock.git'
+		githubRepo = 'ePages-de/restdocs-wiremock'
+		githubReleaseNotesFile = 'README.md'
+		licenses = ['Apache-2.0']
+	}
 }
