@@ -24,6 +24,7 @@ repositories {
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 group = 'com.epages'
+description = 'Spring Boot Starter for adding a WireMock server to your integration test'
 
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-test'
