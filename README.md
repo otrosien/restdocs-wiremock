@@ -88,35 +88,6 @@ the response body as provided by the integration test.
 }
 ```
 
-## How to add WireMock to your client tests
-
-Integrating a WireMock server can easily be achieved by including our `wiremock-spring-boot-starter` into your project.
-It adds a `wireMockServer` bean, which you can auto-wire in your test code. By default, we start WireMock on a dynamic port,
-and set a `wiremock.port` property to the port WireMock is running on. This property can be used to point your clients
-to the location of the `WireMock` server.
-
-Services based on `spring-cloud-netflix`, i.e. using `feign` and `ribbon`, are auto-configured for you.
-
-### Dependencies
-
-To add a dependency via gradle, extend your `build.gradle` with the following line:
-
-```
-  testCompile('com.epages:wiremock-spring-boot-starter:0.6.3')
-```
-
-
-When using maven, add the following dependency in test scope.
-
-```
-<dependency>
-	<groupId>com.epages</groupId>
-	<artifactId>wiremock-spring-boot-starter</artifactId>
-	<version>0.6.3</version>
-	<scope>test</scope>
-</dependency>
-```
-
 ### The WireMock stubs jar
 
 On the server side you need to collect the WireMock stubs and publish them into an artifact repository.
@@ -144,6 +115,34 @@ that, the JSON files can be accessed as classpath resources.
 testRuntime (group:'com.epages', name:'restdocs-server', version:'0.6.3', classifier:'wiremock', ext:'jar')
 ``` 
 
+## How to use WireMock in your client tests
+
+Integrating a WireMock server can easily be achieved by including our `wiremock-spring-boot-starter` into your project.
+It adds a `wireMockServer` bean, which you can auto-wire in your test code. By default, we start WireMock on a dynamic port,
+and set a `wiremock.port` property to the port WireMock is running on. This property can be used to point your clients
+to the location of the `WireMock` server.
+
+Services based on `spring-cloud-netflix`, i.e. using `feign` and `ribbon`, are auto-configured for you.
+
+### Dependencies
+
+To add a dependency via gradle, extend your `build.gradle` with the following line:
+
+```
+  testCompile('com.epages:wiremock-spring-boot-starter:0.6.3')
+```
+
+
+When using maven, add the following dependency in test scope.
+
+```
+<dependency>
+	<groupId>com.epages</groupId>
+	<artifactId>wiremock-spring-boot-starter</artifactId>
+	<version>0.6.3</version>
+	<scope>test</scope>
+</dependency>
+```
 
 ### Configuring your test to use the WireMock stubs
 
@@ -205,3 +204,8 @@ It is possible to read-in a different mapping for each test, by repeating the `@
   ```shell
   ./gradlew restdocs-client:build
   ```
+
+  
+## Publishing
+
+This project makes use of the [axion-release-plugin](https://github.com/allegro/axion-release-plugin). 
