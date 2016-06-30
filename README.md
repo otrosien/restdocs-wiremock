@@ -52,8 +52,8 @@ When using maven, add a dependency in test scope.
 During REST Docs run, snippets like the one below are generated and put into a dedicated jar file, which you can
 publish into your artifact repository. 
 
-Integration into your test code is as simple as replacing the `andDo(document())` calls with
-`andDo(documentWithWireMock())` from `com.epages.restdocs.WireMockDocumentation`. For example:
+Integration into your test code is as simple as adding `wiremockJson()` from `com.epages.restdocs.WireMockDocumentation`
+to the `document()` calls for Spring REST Docs. For example:
 
 ```java
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -61,9 +61,12 @@ Integration into your test code is as simple as replacing the `andDo(document())
 class ApiDocumentation {
     // ... the usual test setup.
     void testGetSingleNote() {
-        this.mockMvc.perform(get("/notes/1").accept(MediaType.APPLICATION_JSON)) 
-        .andExpect(status().isOk()) 
-        .andDo(documentWithWireMock("get-note"));
+        this.mockMvc.perform(get("/notes/1").accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andDo(document("get-note",
+          wiremockJson(),
+          responseFields( ... )
+        ));
     }
 }
 ```
