@@ -8,10 +8,10 @@ buildscript {
 }
 
 plugins {
-	id 'java'
-	id 'maven'
-	id 'maven-publish'
-	id 'eclipse'
+    id 'java'
+    id 'maven'
+    id 'maven-publish'
+    id 'eclipse'
 }
 
 apply plugin: 'spring-boot'
@@ -31,7 +31,7 @@ dependencies {
 }
 
 task sourceJar(type: Jar) {
-	from sourceSets.main.allJava
+    from sourceSets.main.allJava
 }
 
 bootRepackage.enabled = false
