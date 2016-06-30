@@ -2,19 +2,22 @@ package com.example.client;
 
 import java.net.URI;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix="noteservice") class NoteServiceConfiguration {
+class NoteServiceConfiguration {
 
-	private URI baseurl = URI.create("http://localhost:8080");
+	private final Environment env;
 
-	public URI getBaseurl() {
-		return baseurl;
+	@Autowired
+	public NoteServiceConfiguration(Environment env) {
+		this.env = env;
 	}
 
-	public void setBaseurl(URI baseurl) {
-		this.baseurl = baseurl;
+	public URI baseUri() {
+		String baseStr = env.getProperty("noteservice.baseUri");
+		return URI.create(baseStr);
 	}
 }

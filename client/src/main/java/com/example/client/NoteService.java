@@ -1,5 +1,8 @@
 package com.example.client;
 
+import java.net.URI;
+
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -7,17 +10,21 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class NoteService {
 
+	private static final Logger log = org.slf4j.LoggerFactory.getLogger(NoteService.class);
+
 	private final RestTemplate restTemplate;
-	private final NoteServiceConfiguration config;
+
+	private final NoteServiceConfiguration configuration;
 
 	@Autowired
-	public NoteService(NoteServiceConfiguration config) {
+	public NoteService(NoteServiceConfiguration configuration) {
+		this.configuration = configuration;
 		this.restTemplate = new RestTemplate();
-		this.config = config;
 	}
 
 	public Note getNote(String id) {
-		Note note = restTemplate.getForObject(config.getBaseurl().resolve("/notes/"+id), Note.class);
-		return note;
+		URI resolvedUri = configuration.baseUri().resolve("/notes/").resolve(id);
+		log.info("Retrieving note from {}", resolvedUri);
+		return restTemplate.getForObject(resolvedUri, Note.class);
 	}
 }
