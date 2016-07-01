@@ -20,7 +20,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.common.ClasspathFileSource;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import com.github.tomakehurst.wiremock.standalone.JsonFileMappingsLoader;
+import com.github.tomakehurst.wiremock.standalone.JsonFileMappingsSource;
 
 class WireMockListener implements TestExecutionListener, Ordered {
 
@@ -179,7 +179,7 @@ class WireMockListener implements TestExecutionListener, Ordered {
 				stubPath = methodAnnotation.stubPath();
 			}
 			this.server.resetMappings();
-			this.server.loadMappingsUsing(new JsonFileMappingsLoader(new ClasspathFileSource(stubPath)));
+			this.server.loadMappingsUsing(new JsonFileMappingsSource(new ClasspathFileSource(stubPath)));
 		}
 
 		@Override
