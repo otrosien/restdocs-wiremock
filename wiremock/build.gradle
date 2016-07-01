@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    compile "org.springframework.restdocs:spring-restdocs-mockmvc:${rootProject.springRestdocsVersion}"
+    compile "org.springframework.restdocs:spring-restdocs-core:${rootProject.springRestdocsVersion}"
 }
 
 group = 'com.epages'
