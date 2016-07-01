@@ -105,7 +105,7 @@ the response body as provided by the integration test.
 On the server side you need to collect the WireMock stubs and publish them into an artifact repository.
 In gradle this can be achieved by a custom jar task.
 
-```
+```groovy
 task wiremockJar(type: Jar) {
 	description = 'Generates the jar file containing the wiremock stubs for your REST API.'
 	group = 'Build'
@@ -140,7 +140,7 @@ Services based on `spring-cloud-netflix`, i.e. using `feign` and `ribbon`, are a
 
 To add a dependency via gradle, extend your `build.gradle` with the following line:
 
-```
+```groovy
   testCompile('com.epages:wiremock-spring-boot-starter:0.6.8')
 ```
 
