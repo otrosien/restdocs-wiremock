@@ -214,6 +214,9 @@ It is possible to read-in a different mapping for each test, by repeating the `@
 This project makes use of the [axion-release-plugin](https://github.com/allegro/axion-release-plugin). Releasing consists
 of the following steps:
 
+TODO: Update with latest changes.
+
+
 ```
 ./gradlew clean build
 ./gradlew clean
