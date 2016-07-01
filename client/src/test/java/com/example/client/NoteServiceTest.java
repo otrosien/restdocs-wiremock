@@ -41,4 +41,10 @@ public class NoteServiceTest {
 		assertEquals("REST maturity model", noteService.getNote("1").getTitle());
 	}
 
+	@Test(expected = HttpClientErrorException.class)
+	@WireMockTest(stubPath = "wiremock/restdocs-server/mappings/note-badrequest-example")
+	public void should_4_not_find_excluded_wiremock_stub() {
+		assertEquals("REST maturity model", noteService.getNote("1").getTitle());
+	}
+
 }
