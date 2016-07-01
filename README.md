@@ -179,7 +179,7 @@ public class NoteServiceTest {
 3. Extend your test with properties to point to your WireMock server.
    In our example we are using a Spring Expression inside `application-test.properties` to point our noteservice to
    WireMock: `noteservice.baseUri=http://localhost:${wiremock.port}/`
-4. the `@WireMockTest` annotation enables the `wireMockServer` bean, which can be accessed
+4. The `@WireMockTest` annotation enables the `wireMockServer` bean, which can be accessed
    from your test's application context. By default, it starts a WireMockServer on a dynamic port, but you could also
    set it to a fixed port. The `stubPath` property can be used to point to a classpath resource folder that
    holds your json stubs.
@@ -187,12 +187,12 @@ public class NoteServiceTest {
    [WireMock documentation](http://wiremock.org/).
 
 It is possible to read-in a subset of mappings for each test, by repeating the `@WireMockTest` annotation on the test method.
-The stubPath is concatenated from the path given on the test and the test method, just as a `@RequestMapping` annotation in Spring would.
+The `stubPath` is concatenated from the values given on the test class and the test method, just as a `@RequestMapping` annotation in Spring would.
 In the example given below, the resulting stubPath provided to WireMock is composed as `wiremock/myservice/specific-mappings`.
 
 ```java
 @WireMockTest(stubPath = "wiremock/myservice")
-class MyTest
+public class MyTest {
     @Test
     @WireMockTest(stubPath = "specific-mappings")
     public void testDifferentMappings() {
