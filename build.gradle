@@ -26,6 +26,5 @@ allprojects {
     project.version = scmVersion.version
 }
 
-publish.dependsOn('verifyRelease')
 publish.dependsOn(':restdocs-wiremock:bintrayUpload')
 publish.dependsOn(':wiremock-spring-boot-starter:bintrayUpload')
