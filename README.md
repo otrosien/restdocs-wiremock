@@ -161,29 +161,27 @@ When using maven, add the following dependency in test scope.
 Here is an excerpt of the sample test from the restdocs-client project to illustrate the usage.
 
 ```java
-@RunWith(SpringJUnit4ClassRunner.class) // (1)
-@SpringApplicationConfiguration(classes = { ClientApplication.class }) // (2)
-@ActiveProfiles("test") // (3)
-@WireMockTest(stubPath = "wiremock/restdocs-server") // (4) 
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = { ClientApplication.class })
+@ActiveProfiles("test") // (1)
+@WireMockTest(stubPath = "wiremock/restdocs-server") // (2) 
 public class NoteServiceTest {
 
     @Autowired
-    private WireMockServer wireMockServer; // (5)
+    private WireMockServer wireMockServer; // (3)
 
     ....
 }
 ```
 
-1. Use Spring's JUnit Runner (as of 1.4.0 this will be called `SpringRunner`), for this is an integration test.
-2. Include the usual application configuration classes
-3. Extend your test with properties to point to your WireMock server.
+1. Configure your test to point to your WireMock server.
    In our example we are using a Spring Expression inside `application-test.properties` to point our noteservice to
    WireMock: `noteservice.baseUri=http://localhost:${wiremock.port}/`
-4. The `@WireMockTest` annotation enables the `wireMockServer` bean, which can be accessed
+2. The `@WireMockTest` annotation enables the `wireMockServer` bean, which can be accessed
    from your test's application context. By default, it starts a WireMockServer on a dynamic port, but you could also
    set it to a fixed port. The `stubPath` property can be used to point to a classpath resource folder that
    holds your json stubs.
-5. If you want, you can auto-wire the `WireMockServer` instance, and re-configure it, just as described in the official
+3. If you want, you can auto-wire the `WireMockServer` instance, and re-configure it, just as described in the official
    [WireMock documentation](http://wiremock.org/).
 
 It is possible to read-in a subset of mappings for each test, by repeating the `@WireMockTest` annotation on the test method.
