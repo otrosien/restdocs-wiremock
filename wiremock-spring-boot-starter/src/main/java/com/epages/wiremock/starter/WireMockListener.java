@@ -42,10 +42,10 @@ class WireMockListener extends AbstractTestExecutionListener {
 
 		if (annotation != null) {
 			ArrayList<String> properties = new ArrayList<>();
-			properties.add("wiremock.port=" + String.valueOf(port));
+			properties.add("wiremock.port=" + port);
 			properties.add("ribbon.eureka.enabled=false");
 			for (String service : annotation.ribbonServices()) {
-				properties.add(service + ".ribbon.listOfServers=localhost:" + String.valueOf(port));
+				properties.add(service + ".ribbon.listOfServers=localhost:" + port);
 			}
 
 			addPropertySourceProperties(testContext, properties.toArray(new String[0]));
