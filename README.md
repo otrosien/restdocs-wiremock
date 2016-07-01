@@ -184,11 +184,15 @@ public class NoteServiceTest {
 5. If you want, you can auto-wire the `WireMockServer` instance, and re-configure it, just as described in the official
    [WireMock documentation](http://wiremock.org/).
 
-It is possible to read-in a different mapping for each test, by repeating the `@WireMockTest` annotation on the test method.
+It is possible to read-in a subset of mappings for each test, by repeating the `@WireMockTest` annotation on the test method.
+The stubPath is concatenated from the path given on the test and the test method, just as a `@RequestMapping` annotation in Spring would.
+In the example given below, the resulting stubPath provided to WireMock is composed as `wiremock/myservice/specific-mappings`.
 
 ```java
+@WireMockTest(stubPath = "wiremock/myservice")
+class MyTest
     @Test
-    @WireMockTest(stubPath = "wiremock/different-mappings")
+    @WireMockTest(stubPath = "specific-mappings")
     public void testDifferentMappings() {
      ....
     }
