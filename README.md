@@ -180,7 +180,9 @@ public class NoteServiceTest {
    In our example we are using a Spring Expression inside `application-test.properties` to point our noteservice to
    WireMock: `noteservice.baseUri=http://localhost:${wiremock.port}/`
 4. the `@WireMockTest` annotation enables the `wireMockServer` bean, which can be accessed
-   from your test's application context.
+   from your test's application context. By default, it starts a WireMockServer on a dynamic port, but you could also
+   set it to a fixed port. The `stubPath` property can be used to point to a classpath resource folder that
+   holds your json stubs.
 5. If you want, you can auto-wire the `WireMockServer` instance, and re-configure it, just as described in the official
    [WireMock documentation](http://wiremock.org/).
 
