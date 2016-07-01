@@ -26,19 +26,28 @@ This repository consists of four projects
 
 ### Dependencies
 
-The project is published on `jcenter` from `bintray`, so firstly, you need to add `jcenter` as package repository for your project.
+The project is published on `jcenter` from `bintray`, so firstly, you need to add `jcenter` as package
+repository for your project. Please make sure you use the current release of Spring REST Docs, which is 
+`1.1.0.RELEASE` as of this writing. The example below shows how to set Spring REST Docs to this version
+when using Spring dependency management.
 
-Then, when using gradle, add a testCompile dependency.
+Then, add restdocs-wiremock as a dependency in test scope. In gradle it would look like this:
 
-```
+```groovy
+dependencyManagement.imports {
+    ext['spring-restdocs.version'] = '1.1.0.RELEASE'
+}
 dependencies {
   testCompile('com.epages:restdocs-wiremock:0.6.8')
 }
 ```
 
-When using maven, add a dependency in test scope.
+When using maven:
 
-```
+```xml
+<properties>
+	<spring-restdocs.version>1.1.0.RELEASE</spring-restdocs.version>
+</properties>
 <dependency>
 	<groupId>com.epages</groupId>
 	<artifactId>restdocs-wiremock</artifactId>
@@ -114,7 +123,7 @@ task wiremockJar(type: Jar) {
 On the client side, add a dependency to the test-runtime to the jar containing the WireMock stubs. After
 that, the JSON files can be accessed as classpath resources.
 
-```
+```groovy
 testRuntime (group:'com.epages', name:'restdocs-server', version:'0.6.8', classifier:'wiremock', ext:'jar')
 ``` 
 
@@ -138,7 +147,7 @@ To add a dependency via gradle, extend your `build.gradle` with the following li
 
 When using maven, add the following dependency in test scope.
 
-```
+```xml
 <dependency>
 	<groupId>com.epages</groupId>
 	<artifactId>wiremock-spring-boot-starter</artifactId>
@@ -151,7 +160,7 @@ When using maven, add the following dependency in test scope.
 
 Here is an excerpt of the sample test from the restdocs-client project to illustrate the usage.
 
-```
+```java
 @RunWith(SpringJUnit4ClassRunner.class) // (1)
 @SpringApplicationConfiguration(classes = { ClientApplication.class }) // (2)
 @ActiveProfiles("test") // (3)
@@ -177,7 +186,7 @@ public class NoteServiceTest {
 
 It is possible to read-in a different mapping for each test, by repeating the `@WireMockTest` annotation on the test method.
 
-```
+```java
     @Test
     @WireMockTest(stubPath = "wiremock/different-mappings")
     public void testDifferentMappings() {
@@ -217,6 +226,6 @@ and publishing is automated in travis, when a new release is tagged in git.
 Locally you should be able to create a new release by running the `release` task on gradle. A successful
 travis build of this tag should finally end up on [bintray](https://bintray.com/epages/maven/restdocs-wiremock/).
 
-```
+```shell
 ./gradlew clean build release
 ```
