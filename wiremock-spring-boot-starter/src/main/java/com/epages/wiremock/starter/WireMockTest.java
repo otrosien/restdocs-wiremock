@@ -41,4 +41,9 @@ public @interface WireMockTest {
 	 * repeating the {@link WireMockTest} annotation on method level.
 	 */
 	String stubPath() default "";
+
+	/**
+	 * Sets WireMock to a fixed port. By default WireMock is started on a dynamic port.
+	 */
+	int port() default 0;
 }

@@ -25,13 +25,13 @@ public class NoteServiceTest {
 	private NoteService noteService;
 
 	@Test
-	@WireMockTest(stubPath = "wiremock/restdocs-server/mappings/note-get-example")
+	@WireMockTest(stubPath = "mappings/note-get-example")
 	public void should_1_use_dedicated_wiremock_stub() {
 		assertEquals("REST maturity model", noteService.getNote("1").getTitle());
 	}
 
 	@Test(expected = HttpClientErrorException.class)
-	@WireMockTest(stubPath = "wiremock/restdocs-server/mappings/note-badrequest-example")
+	@WireMockTest(stubPath = "mappings/note-badrequest-example")
 	public void should_2_use_different_wiremock_stub() {
 		noteService.getNote("xy");
 	}
@@ -42,9 +42,9 @@ public class NoteServiceTest {
 	}
 
 	@Test(expected = HttpClientErrorException.class)
-	@WireMockTest(stubPath = "wiremock/restdocs-server/mappings/note-badrequest-example")
+	@WireMockTest(stubPath = "mappings/note-badrequest-example")
 	public void should_4_not_find_excluded_wiremock_stub() {
-		assertEquals("REST maturity model", noteService.getNote("1").getTitle());
+		noteService.getNote("1");
 	}
 
 }
