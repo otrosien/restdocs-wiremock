@@ -1,5 +1,6 @@
 # Spring REST Docs WireMock Integration
 
+![](https://img.shields.io/github/license/ePages-de/restdocs-wiremock.svg)
 [ ![Build Status](https://travis-ci.org/ePages-de/restdocs-wiremock.svg)](https://travis-ci.org/ePages-de/restdocs-wiremock)
 [ ![Download](https://api.bintray.com/packages/epages/maven/restdocs-wiremock/images/download.svg)](https://bintray.com/epages/maven/restdocs-wiremock/_latestVersion)
 
