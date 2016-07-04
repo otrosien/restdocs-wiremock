@@ -59,7 +59,7 @@ bintray {
 	publish = true
 	pkg {
 		repo = "maven"
-		name = 'restdocs-wiremock'
+		name = 'wiremock-spring-boot-starter'
 		userOrg = 'epages'
 		websiteUrl = 'https://github.com/ePages-de/restdocs-wiremock'
 		issueTrackerUrl = 'https://github.com/ePages-de/restdocs-wiremock/issues'
