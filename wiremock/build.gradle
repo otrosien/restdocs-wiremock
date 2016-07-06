@@ -2,7 +2,9 @@ plugins {
     id 'java'
     id 'maven'
     id 'maven-publish'
+    id 'jacoco'
     id "com.jfrog.bintray" version '1.6'
+    id 'com.github.kt3k.coveralls' version '2.6.3'
 }
 
 repositories {
@@ -21,6 +23,17 @@ group = 'com.epages'
 description = 'Adds WireMock stub snippets to Spring REST Docs'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
+    }
+}
+
+tasks.coveralls {
+    dependsOn 'check'
+}
 
 task sourceJar(type: Jar) {
     from sourceSets.main.allJava
