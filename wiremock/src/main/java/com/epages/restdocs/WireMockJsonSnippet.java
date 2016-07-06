@@ -109,7 +109,6 @@ final class WireMockJsonSnippet implements Snippet {
 	}
 
 	static class Maps {
-		private Maps(){}
 		static <K, V> Map<K, V> of(K k1, V v1) {
 			HashMap<K, V> map = new HashMap<>();
 			map.put(k1, v1);
