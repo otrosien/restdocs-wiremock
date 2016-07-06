@@ -29,7 +29,7 @@ This repository consists of four projects
 
 The project is published on `jcenter` from `bintray`, so firstly, you need to add `jcenter` as package
 repository for your project. Please make sure you use the current release of Spring REST Docs, which is 
-`1.1.0.RELEASE` as of this writing. The 1.0.x.RELEASE, included with Spring Boot is not compatible with this plugin.
+`1.1.0.RELEASE` as of this writing. The `1.0.x.RELEASE`, included with Spring Boot 1.3 is not compatible with this plugin.
 The example below shows how to set Spring REST Docs to this version, when using Spring dependency management.
 
 Then, add restdocs-wiremock as a dependency in test scope. In gradle it would look like this:
