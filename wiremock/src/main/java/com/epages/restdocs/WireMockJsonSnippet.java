@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.restdocs.RestDocumentationContext;
+import org.springframework.restdocs.cli.QueryStringParser;
 import org.springframework.restdocs.operation.Operation;
 import org.springframework.restdocs.operation.OperationRequest;
 import org.springframework.restdocs.operation.OperationResponse;
+import org.springframework.restdocs.operation.Parameters;
 import org.springframework.restdocs.snippet.RestDocumentationContextPlaceholderResolverFactory;
 import org.springframework.restdocs.snippet.Snippet;
 import org.springframework.restdocs.snippet.StandardWriterResolver;
@@ -24,7 +26,7 @@ final class WireMockJsonSnippet implements Snippet {
 
 	private static final String SNIPPET_NAME = "wiremock-stub";
 
-	private static final TemplateFormat TEMPLATE_FORMAT = new TemplateFormat() {
+	static final TemplateFormat TEMPLATE_FORMAT = new TemplateFormat() {
 
 		@Override
 		public String getId() {
@@ -83,7 +85,9 @@ final class WireMockJsonSnippet implements Snippet {
 	private Map<Object, Object> queryParams(Operation operation) {
 		Maps.Builder<Object, Object> queryParams = Maps.builder();
 
-		for (Map.Entry<String, List<String>> e : operation.getRequest().getParameters().entrySet()) {
+		Parameters queryStringParameters = new QueryStringParser().parse(operation.getRequest().getUri());
+
+		for (Map.Entry<String, List<String>> e : queryStringParameters.entrySet()) {
 			queryParams.put(e.getKey(), Maps.of("equalTo", e.getValue().get(0)));
 		}
 
