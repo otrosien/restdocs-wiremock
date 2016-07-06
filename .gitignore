@@ -1,6 +1,7 @@
 .gradle/
 .*
 !.gitignore
+!.travis.yml
 .settings/
 build/
 bin/
