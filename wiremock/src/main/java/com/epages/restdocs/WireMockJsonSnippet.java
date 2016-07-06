@@ -108,30 +108,34 @@ final class WireMockJsonSnippet implements Snippet {
 		return requestHeaders.build();
 	}
 
-	static class Maps {
-		static <K, V> Map<K, V> of(K k1, V v1) {
+	// Small helper from swapping out guava.
+	private abstract static class Maps {
+		private Maps() {
+		}
+
+		private static <K, V> Map<K, V> of(K k1, V v1) {
 			HashMap<K, V> map = new HashMap<>();
 			map.put(k1, v1);
 			return map;
 		}
 
-		static <K, V> Builder<K, V> builder() {
+		private static <K, V> Builder<K, V> builder() {
 			return new Builder<>();
 		}
 
-		static class Builder<K, V> {
+		private static class Builder<K, V> {
 			private final Map<K, V> map;
 
-			public Builder() {
+			private Builder() {
 				map = new HashMap<>();
 			}
 
-			Builder<K, V> put(K k, V v) {
+			private Builder<K, V> put(K k, V v) {
 				map.put(k, v);
 				return this;
 			}
 
-			Map<K, V> build() {
+			private Map<K, V> build() {
 				return map;
 			}
 		}
