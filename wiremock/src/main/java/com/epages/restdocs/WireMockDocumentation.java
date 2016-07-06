@@ -7,10 +7,7 @@ import org.springframework.restdocs.snippet.Snippet;
  * integrate generation of WireMock stubs. Most of the static API was deprecated 
  * in 0.6.x and removed in 0.7.0.
  */
-public final class WireMockDocumentation {
-
-	private WireMockDocumentation() {
-	}
+public abstract class WireMockDocumentation {
 
 	/**
 	 * Returns a json {@code Snippet} that will generate the WireMock stub from

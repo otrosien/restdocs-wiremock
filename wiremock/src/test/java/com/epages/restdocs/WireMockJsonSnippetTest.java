@@ -1,5 +1,6 @@
 package com.epages.restdocs;
 
+import static com.epages.restdocs.WireMockDocumentation.wiremockJson;
 import static com.google.common.collect.ImmutableMap.of;
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -33,6 +34,7 @@ import org.springframework.restdocs.test.ExpectedSnippet;
 import org.springframework.restdocs.test.OperationBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.ImmutableMap;
 
 import uk.co.datumedge.hamcrest.json.SameJSONAs;
 
@@ -70,27 +72,22 @@ public class WireMockJsonSnippetTest {
 		verifySnippetInvocation(this.snippet, configuration);
 	}
 
-
 	@SuppressWarnings("unchecked")
 	@Test
 	public void getRequest() throws IOException {
-		this.expectedSnippet.expectWireMockJson("get-request")
-				.withContents(
-						(Matcher<String>) SameJSONAs
-								.sameJSONAs(
-										new ObjectMapper().writeValueAsString( //
-												of( //
-														"request", //
-														of("method", "GET", "urlPath", "/foo", "queryParameters", //
-																of("a", of("equalTo", "b")), "headers",
-																		of("Accept",
-																				of("equalTo", "application/json"))), //
-														"response", //
-														of("headers", emptyMap(), "body", "", "status", 200)))));
-		new WireMockJsonSnippet()
-				.document(
-						operationBuilder("get-request").request("http://localhost/foo?a=b").method("GET")
-								.header("Accept", "application/json").build());
+		this.expectedSnippet.expectWireMockJson("get-request").withContents(
+				(Matcher<String>) SameJSONAs.sameJSONAs(new ObjectMapper().writeValueAsString(expectedJson())));
+		wiremockJson().document(operationBuilder("get-request").request("http://localhost/foo?a=b").method("GET")
+				.header("Accept", "application/json").build());
+	}
+
+	private ImmutableMap<String, ImmutableMap<String, ? extends Object>> expectedJson() {
+		return of( //
+				"request", //
+				of("method", "GET", "urlPath", "/foo", "queryParameters", //
+						of("a", of("equalTo", "b")), "headers", of("Accept", of("equalTo", "application/json"))), //
+				"response", //
+				of("headers", emptyMap(), "body", "", "status", 200));
 	}
 
 	public OperationBuilder operationBuilder(String name) {
