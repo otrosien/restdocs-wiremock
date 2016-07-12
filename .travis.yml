@@ -5,6 +5,7 @@ sudo: false
 cache:
   directories:
   - "$HOME/.gradle"
+install: true
 script: "./gradlew clean build jacoco coveralls"
 after_success: "./publish.sh"
 env:
