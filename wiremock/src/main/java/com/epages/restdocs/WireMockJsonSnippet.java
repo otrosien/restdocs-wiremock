@@ -88,7 +88,10 @@ final class WireMockJsonSnippet implements Snippet {
 		Parameters queryStringParameters = new QueryStringParser().parse(operation.getRequest().getUri());
 
 		for (Map.Entry<String, List<String>> e : queryStringParameters.entrySet()) {
-			queryParams.put(e.getKey(), Maps.of("equalTo", e.getValue().get(0)));
+			List<String> values = e.getValue();
+			if (!values.isEmpty()) {
+				queryParams.put(e.getKey(), Maps.of("equalTo", values.get(0)));
+			}
 		}
 
 		return queryParams.build();
@@ -102,7 +105,10 @@ final class WireMockJsonSnippet implements Snippet {
 		Maps.Builder<Object, Object> requestHeaders = Maps.builder();
 		for (Map.Entry<String, List<String>> e : request.getHeaders().entrySet()) {
 			if ("content-type".equalsIgnoreCase(e.getKey()) || "accept".equalsIgnoreCase(e.getKey())) {
-				requestHeaders.put(e.getKey(), Maps.of("equalTo", e.getValue().get(0)));
+				List<String> values = e.getValue();
+				if (!values.isEmpty()) {
+					requestHeaders.put(e.getKey(), Maps.of("equalTo", values.get(0)));
+				}
 			}
 		}
 		return requestHeaders.build();

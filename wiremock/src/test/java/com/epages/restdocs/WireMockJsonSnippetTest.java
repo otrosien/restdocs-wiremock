@@ -34,6 +34,7 @@ import org.springframework.restdocs.test.ExpectedSnippet;
 import org.springframework.restdocs.test.OperationBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
 import uk.co.datumedge.hamcrest.json.SameJSONAs;
@@ -74,20 +75,58 @@ public class WireMockJsonSnippetTest {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void getRequest() throws IOException {
+	public void simpleRequest() throws IOException {
+		this.expectedSnippet.expectWireMockJson("simple-request").withContents(
+				(Matcher<String>) SameJSONAs
+						.sameJSONAs(new ObjectMapper().writeValueAsString(expectedJsonForSimpleRequest())));
+		wiremockJson().document(operationBuilder("simple-request").request("http://localhost/").method("GET").build());
+	}
+
+	private ImmutableMap<String, ImmutableMap<String, ? extends Object>> expectedJsonForSimpleRequest() {
+		return of( //
+				"request", //
+				of("method", "GET", "urlPath", "/"), //
+				"response", //
+				of("headers", emptyMap(), "body", "", "status", 200));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void getRequestWithParams() throws IOException {
 		this.expectedSnippet.expectWireMockJson("get-request").withContents(
-				(Matcher<String>) SameJSONAs.sameJSONAs(new ObjectMapper().writeValueAsString(expectedJson())));
-		wiremockJson().document(operationBuilder("get-request").request("http://localhost/foo?a=b").method("GET")
+				(Matcher<String>) SameJSONAs.sameJSONAs(new ObjectMapper().writeValueAsString(expectedJsonForGetRequestWithParams())));
+		wiremockJson().document(operationBuilder("get-request").request("http://localhost/foo?a=b&c=").method("GET")
 				.header("Accept", "application/json").build());
 	}
 
-	private ImmutableMap<String, ImmutableMap<String, ? extends Object>> expectedJson() {
+	private ImmutableMap<String, ImmutableMap<String, ? extends Object>> expectedJsonForGetRequestWithParams() {
 		return of( //
 				"request", //
 				of("method", "GET", "urlPath", "/foo", "queryParameters", //
 						of("a", of("equalTo", "b")), "headers", of("Accept", of("equalTo", "application/json"))), //
 				"response", //
 				of("headers", emptyMap(), "body", "", "status", 200));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void postRequest() throws IOException {
+		this.expectedSnippet.expectWireMockJson("post-request").withContents((Matcher<String>) SameJSONAs
+				.sameJSONAs(new ObjectMapper().writeValueAsString(expectedJsonForPostRequest())));
+		OperationBuilder operationBuilder = operationBuilder("post-request");
+		operationBuilder.response().content("response-content").header("Content-Type", "text/plain").build();
+		wiremockJson().document(operationBuilder.request("http://localhost/").method("POST")
+				.header("Content-Type", "text/uri-list").content("http://some.uri").build());
+	}
+
+	private Map<String, ? extends Object> expectedJsonForPostRequest() {
+		return of( //
+				"request", //
+				of("method", "POST", "urlPath", "/", "headers", of("Content-Type", of("equalTo", "text/uri-list"))), //
+				"response", //
+				of("headers",
+						of("Content-Length", ImmutableList.of("16"), "Content-Type", ImmutableList.of("text/plain")),
+						"body", "response-content", "status", 200));
 	}
 
 	public OperationBuilder operationBuilder(String name) {
