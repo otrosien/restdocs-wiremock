@@ -16,61 +16,43 @@
 
 package com.example.notes;
 
+import java.net.URI;
+import java.util.Collections;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import org.hibernate.validator.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Entity
-public class Note {
+public class NoteInput {
+	
+	@NotBlank
+	private final String title;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private final String body;
 
-	private String title;
+	private final List<URI> tagUris;
 
-	private String body;
-
-	@ManyToMany
-	private List<Tag> tags;
-
-	@JsonIgnore
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
+	@JsonCreator
+	public NoteInput(@JsonProperty("title") String title,
+			@JsonProperty("body") String body, @JsonProperty("tags") List<URI> tagUris) {
+		this.title = title;
+		this.body = body;
+		this.tagUris = tagUris == null ? Collections.<URI>emptyList() : tagUris;
 	}
 
 	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
 	public String getBody() {
 		return body;
 	}
 
-	public void setBody(String body) {
-		this.body = body;
+	@JsonProperty("tags")
+	public List<URI> getTagUris() {
+		return this.tagUris;
 	}
 
-	@JsonIgnore
-	public List<Tag> getTags() {
-		return tags;
-	}
-
-	public void setTags(List<Tag> tags) {
-		this.tags = tags;
-	}
 }

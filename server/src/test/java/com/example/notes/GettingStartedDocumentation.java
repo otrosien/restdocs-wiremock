@@ -16,7 +16,6 @@
 
 package com.example.notes;
 
-
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -25,6 +24,9 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.patch;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -51,18 +53,15 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.epages.restdocs.RestDocumentation;
 import com.jayway.jsonpath.JsonPath;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = RestNotesSpringDataRest.class)
+@SpringApplicationConfiguration(classes = RestNotesSpringHateoas.class)
 @WebAppConfiguration
 public class GettingStartedDocumentation {
 	
 	@Rule
-	// custom
-	public final JUnitRestDocumentation restDocumentation = RestDocumentation.usingGradleDir();
-	// end custom
+	public final JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("build/generated-snippets");
 
 	@Autowired
 	private ObjectMapper objectMapper;
@@ -76,9 +75,9 @@ public class GettingStartedDocumentation {
 	public void setUp() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
 				.apply(documentationConfiguration(this.restDocumentation))
-				// custom
-				.alwaysDo(document("{method-name}/{step}/"))
-				// custom end
+				.alwaysDo(document("{method-name}/{step}/",
+						preprocessRequest(prettyPrint()),
+						preprocessResponse(prettyPrint())))
 				.build();
 	}
 
@@ -100,10 +99,10 @@ public class GettingStartedDocumentation {
 
 		String taggedNoteLocation = createTaggedNote(tagLocation);
 		MvcResult taggedNote = getNote(taggedNoteLocation);
-		getTags(getLink(taggedNote, "tags"));
+		getTags(getLink(taggedNote, "note-tags"));
 
 		tagExistingNote(noteLocation, tagLocation);
-		getTags(getLink(note, "tags"));
+		getTags(getLink(note, "note-tags"));
 	}
 
 	String createNote() throws Exception {
@@ -126,7 +125,7 @@ public class GettingStartedDocumentation {
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("title", is(notNullValue())))
 				.andExpect(jsonPath("body", is(notNullValue())))
-				.andExpect(jsonPath("_links.tags", is(notNullValue())))
+				.andExpect(jsonPath("_links.note-tags", is(notNullValue())))
 				.andReturn();
 	}
 
@@ -147,7 +146,7 @@ public class GettingStartedDocumentation {
 	void getTag(String tagLocation) throws Exception {
 		this.mockMvc.perform(get(tagLocation)).andExpect(status().isOk())
 			.andExpect(jsonPath("name", is(notNullValue())))
-			.andExpect(jsonPath("_links.notes", is(notNullValue())));
+			.andExpect(jsonPath("_links.tagged-notes", is(notNullValue())));
 	}
 
 	String createTaggedNote(String tag) throws Exception {
