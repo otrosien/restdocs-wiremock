@@ -27,7 +27,7 @@ public class NoteServiceTest {
 	@Test
 	@WireMockTest(stubPath = "mappings/note-get-example")
 	public void should_1_use_dedicated_wiremock_stub() {
-		assertEquals("REST maturity model", noteService.getNote("1").getTitle());
+		assertEquals("REST maturity model", noteService.getNote("6").getTitle());
 	}
 
 	@Test(expected = HttpClientErrorException.class)
@@ -38,7 +38,7 @@ public class NoteServiceTest {
 
 	@Test
 	public void should_3_use_default_wiremock_stubs() {
-		assertEquals("REST maturity model", noteService.getNote("1").getTitle());
+		assertEquals("REST maturity model", noteService.getNote("6").getTitle());
 	}
 
 	@Test(expected = HttpClientErrorException.class)

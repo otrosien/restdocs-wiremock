@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 the original author or authors.
+ * Copyright 2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,21 @@
 
 package com.example.notes;
 
-import java.util.Collection;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.springframework.data.repository.CrudRepository;
+public class TagPatchInput {
+	
+	@NullOrNotBlank
+	private final String name;
 
-public interface NoteRepository extends CrudRepository<Note, Long> {
+	@JsonCreator
+	public TagPatchInput(@NullOrNotBlank @JsonProperty("name") String name) {
+		this.name = name;
+	}
 
-	Note findById(long id);
-
-	List<Note> findByTagsIn(Collection<Tag> tags);
+	public String getName() {
+		return name;
+	}
+	
 }

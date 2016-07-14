@@ -34,16 +34,15 @@ dependencyManagement.imports {
 }
 
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-data-rest'
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+	compile 'org.springframework.boot:spring-boot-starter-hateoas'
 
-    runtime 'com.h2database:h2'
-    runtime 'org.atteo:evo-inflector:1.2.1'
-    runtime 'org.springframework.data:spring-data-rest-hal-browser'
+	runtime 'com.h2database:h2'
+	runtime 'org.atteo:evo-inflector:1.2.1'
 
-    testCompile 'com.jayway.jsonpath:json-path'
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
-    testCompile "org.springframework.restdocs:spring-restdocs-mockmvc:$springRestdocsVersion"
+	testCompile 'com.jayway.jsonpath:json-path'
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc'
     testCompile "com.epages:restdocs-wiremock:${project.version}"
 }
 

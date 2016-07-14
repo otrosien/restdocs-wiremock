@@ -55,6 +55,7 @@ public class Tag {
 		this.name = name;
 	}
 
+	@JsonIgnore
 	public List<Note> getNotes() {
 		return notes;
 	}
