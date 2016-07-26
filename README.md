@@ -48,7 +48,7 @@ When using maven:
 
 ```xml
 <properties>
-	<spring-restdocs.version>1.1.0.RELEASE</spring-restdocs.version>
+	<spring-restdocs.version>1.1.1.RELEASE</spring-restdocs.version>
 </properties>
 <dependency>
 	<groupId>com.epages</groupId>
