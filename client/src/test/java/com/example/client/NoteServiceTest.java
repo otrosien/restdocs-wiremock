@@ -2,6 +2,8 @@ package com.example.client;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +15,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.HttpClientErrorException;
 
 import com.epages.wiremock.starter.WireMockTest;
+import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.stubbing.StubMapping;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = { ClientApplication.class })
@@ -23,6 +27,9 @@ public class NoteServiceTest {
 
 	@Autowired
 	private NoteService noteService;
+
+	@Autowired
+	private WireMockServer server;
 
 	@Test
 	@WireMockTest(stubPath = "mappings/note-get-example")
@@ -45,6 +52,13 @@ public class NoteServiceTest {
 	@WireMockTest(stubPath = "mappings/note-badrequest-example")
 	public void should_4_not_find_excluded_wiremock_stub() {
 		noteService.getNote("1");
+	}
+
+	@Test
+	public void should_print_wiremock_mappings() {
+		List<StubMapping> mappings = server.listAllStubMappings().getMappings();
+		System.out.println("\n\nRegistered WireMock Mappings:\n" + mappings);
+		assertEquals(11, mappings.size());
 	}
 
 }
