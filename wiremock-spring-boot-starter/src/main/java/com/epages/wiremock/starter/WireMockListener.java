@@ -43,13 +43,13 @@ class WireMockListener extends AbstractTestExecutionListener implements Ordered 
 		ArrayList<String> properties = new ArrayList<>();
 		properties.add("wiremock.port=" + port);
 		properties.add("wiremock.enabled=true");
+		properties.add("wiremock.stubPath=" + wireMockAnnotation.stubPath());
 		properties.add("ribbon.eureka.enabled=false");
 		for (String service : (String[]) wireMockAnnotation.ribbonServices()) {
 			properties.add(service + ".ribbon.listOfServers=localhost:" + port);
 		}
 
 		addPropertySourceProperties(testContext, properties.toArray(new String[0]));
-		
 	}
 
 	@Override

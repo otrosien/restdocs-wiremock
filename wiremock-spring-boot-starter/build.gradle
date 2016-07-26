@@ -29,6 +29,7 @@ description = 'Spring Boot Starter for adding a WireMock server to your integrat
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-test'
     compile 'org.springframework.boot:spring-boot-starter'
+    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
     compile 'com.github.tomakehurst:wiremock:2.1.7'
 }
 
