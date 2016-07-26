@@ -1,5 +1,6 @@
 package com.epages.wiremock.starter;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -26,6 +27,8 @@ import com.github.tomakehurst.wiremock.WireMockServer;
  * 
  */
 @Retention(RetentionPolicy.RUNTIME)
+@Documented
+//@Import({ WireMockAutoConfiguration.class })
 @Target({ ElementType.TYPE, ElementType.METHOD })
 public @interface WireMockTest {
 
