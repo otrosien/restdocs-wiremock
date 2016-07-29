@@ -29,18 +29,22 @@ This repository consists of four projects
 ### Dependencies
 
 The project is published on `jcenter` from `bintray`, so firstly, you need to add `jcenter` as package
-repository for your project. Please make sure you use the current release of Spring REST Docs, which is 
+repository for your project. 
+Then, add restdocs-wiremock as a dependency in test scope. In gradle it would look like this:
+
+```groovy
+dependencies {
+  testCompile('com.epages:restdocs-wiremock:0.7.5')
+}
+```
+
+Spring Boot 1.3.x users: Please make sure you use the current release of Spring REST Docs, which is 
 `1.1.1.RELEASE` as of this writing. The `1.0.x.RELEASE`, included with Spring Boot 1.3 is not compatible with this plugin.
 The example below shows how to set Spring REST Docs to this version, when using Spring dependency management.
-
-Then, add restdocs-wiremock as a dependency in test scope. In gradle it would look like this:
 
 ```groovy
 dependencyManagement.imports {
     ext['spring-restdocs.version'] = '1.1.1.RELEASE'
-}
-dependencies {
-  testCompile('com.epages:restdocs-wiremock:0.7.5')
 }
 ```
 
