@@ -29,9 +29,10 @@ ext {
     snippetsDir = file('build/generated-snippets')
 }
 
-dependencyManagement.imports {
-    ext['spring-restdocs.version'] = "${rootProject.ext.springRestdocsVersion}"
-}
+// rely on restdocs shipped with spring-boot
+//dependencyManagement.imports {
+//    ext['spring-restdocs.version'] = "${rootProject.ext.springRestdocsVersion}"
+//}
 
 dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
