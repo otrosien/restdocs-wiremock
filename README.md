@@ -12,6 +12,8 @@ The basic idea is to use the requests and responses from the integration tests a
 API contract. The mock templates can be packaged as jar files and be published into your company's
 artifact repository for this purpose.
 
+Details and background information can be read on our [ePages Developer Blog](https://developer.epages.com/blog/2016/07/14/wiremock.html).
+
 ## Contents
 
 This repository consists of four projects
