@@ -30,7 +30,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-test'
     compile 'org.springframework.boot:spring-boot-starter'
     compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
-    compile 'com.github.tomakehurst:wiremock:2.1.7'
+    compile 'com.github.tomakehurst:wiremock:2.1.10'
 }
 
 task sourceJar(type: Jar) {
