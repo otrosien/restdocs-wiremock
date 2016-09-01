@@ -41,12 +41,12 @@ dependencies {
 ```
 
 Spring Boot 1.3.x users: Please make sure you use the current release of Spring REST Docs, which is 
-`1.1.1.RELEASE` as of this writing. The `1.0.x.RELEASE`, included with Spring Boot 1.3 is not compatible with this plugin.
+`1.1.2.RELEASE` as of this writing. The `1.0.x.RELEASE`, included with Spring Boot 1.3 is not compatible with this plugin.
 The example below shows how to set Spring REST Docs to this version, when using Spring dependency management.
 
 ```groovy
 dependencyManagement.imports {
-    ext['spring-restdocs.version'] = '1.1.1.RELEASE'
+    ext['spring-restdocs.version'] = '1.1.2.RELEASE'
 }
 ```
 
@@ -54,7 +54,7 @@ When using maven:
 
 ```xml
 <properties>
-	<spring-restdocs.version>1.1.1.RELEASE</spring-restdocs.version>
+	<spring-restdocs.version>1.1.2.RELEASE</spring-restdocs.version>
 </properties>
 <dependency>
 	<groupId>com.epages</groupId>

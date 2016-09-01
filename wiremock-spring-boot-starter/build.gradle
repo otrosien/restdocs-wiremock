@@ -21,6 +21,10 @@ repositories {
     jcenter()
 }
 
+dependencyManagement.imports {
+    ext['spring-restdocs.version'] = '1.1.2.RELEASE'
+}
+
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 group = 'com.epages'
