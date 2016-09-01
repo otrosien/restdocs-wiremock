@@ -27,7 +27,6 @@ import javax.validation.Validator;
 
 import org.junit.Test;
 
-
 public class NullOrNotBlankTests {
 
 	private final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
