@@ -118,7 +118,15 @@ final class WireMockJsonSnippet implements Snippet {
 			if ("content-type".equalsIgnoreCase(e.getKey()) || "accept".equalsIgnoreCase(e.getKey())) {
 				List<String> values = e.getValue();
 				if (!values.isEmpty()) {
-					requestHeaders.put(e.getKey(), Maps.of("equalTo", values.get(0)));
+					String mediaType = values.get(0);
+					// TODO : use proper MediaType parsing, e.g. from guava.
+					if(mediaType.contains("+")) {
+						mediaType = mediaType.replace("/.*[+]","/(.+[+])?");
+					} else {
+						mediaType = mediaType.replace("/","/(.+[+])?");
+					}
+					mediaType = mediaType + ".*";
+					requestHeaders.put(e.getKey(), Maps.of("matches", mediaType));
 				}
 			}
 		}
