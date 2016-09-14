@@ -102,7 +102,7 @@ public class WireMockJsonSnippetTest {
 		return of( //
 				"request", //
 				of("method", "GET", "urlPath", "/foo", "queryParameters", //
-						of("a", of("equalTo", "b")), "headers", of("Accept", of("matches", "application/(.+[+])?json.*"))), //
+						of("a", of("equalTo", "b")), "headers", of("Accept", of("contains", "json"))), //
 				"response", //
 				of("headers", emptyMap(), "body", "", "status", 200));
 	}
@@ -121,7 +121,7 @@ public class WireMockJsonSnippetTest {
 	private Map<String, ? extends Object> expectedJsonForPostRequest() {
 		return of( //
 				"request", //
-				of("method", "POST", "urlPath", "/", "headers", of("Content-Type", of("matches", "text/(.+[+])?uri-list.*"))), //
+				of("method", "POST", "urlPath", "/", "headers", of("Content-Type", of("contains", "uri-list"))), //
 				"response", //
 				of("headers",
 						of("Content-Length", "16", "Content-Type", "text/plain"),
