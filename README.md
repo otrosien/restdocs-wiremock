@@ -175,6 +175,15 @@ When using maven, add the following dependency in test scope.
 </dependency>
 ```
 
+*Important note for Spring Cloud users*: The BOM produced by Spring Cloud includes a transitive resolution of WireMock 
+version 1.55, (via `spring-cloud-aws` -> `aws-java-sdk-core` -> `wiremock (test)`). As versions from BOM always override 
+transitive versions coming in through maven dependencies, you need to add an explicit dependency on WireMock 2.x to your
+project, like shown in the following gradle example:
+
+```groovy
+  testCompile('com.github.tomakehurst:wiremock:2.1.12')
+```
+
 ### Configuring your test to use the WireMock stubs
 
 Here is an excerpt of the sample test from the restdocs-client project to illustrate the usage.
