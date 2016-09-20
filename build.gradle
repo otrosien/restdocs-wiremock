@@ -8,7 +8,7 @@ repositories {
 }
 
 ext {
-    springRestdocsVersion = '1.1.2.RELEASE'
+    springRestdocsVersion = '1.1.1.RELEASE'
 }
 
 scmVersion {
