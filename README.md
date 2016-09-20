@@ -31,12 +31,18 @@ This repository consists of four projects
 ### Dependencies
 
 The project is published on `jcenter` from `bintray`, so firstly, you need to add `jcenter` as package
-repository for your project. 
-Then, add restdocs-wiremock as a dependency in test scope. In gradle it would look like this:
+repository for your project.
+
+Then, add `restdocs-wiremock` as a dependency in test scope. As `restdocs-wiremock` only depends on `spring-restdocs-core`,
+you also need to add either `spring-restdocs-mockmvc` or `spring-restdocs-restassured`, depending on your test scenario.
+It is recommended to use the `spring-boot` gradle plugin to enable dependency management from the Spring IO Platform.
+
+In gradle it would look like this:
 
 ```groovy
 dependencies {
   testCompile('com.epages:restdocs-wiremock:0.7.11')
+  testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
 }
 ```
 
@@ -60,6 +66,11 @@ When using maven:
 	<groupId>com.epages</groupId>
 	<artifactId>restdocs-wiremock</artifactId>
 	<version>0.7.11</version>
+	<scope>test</scope>
+</dependency>
+<dependency>
+	<groupId>org.springframework.restdocs</groupId>
+	<artifactId>spring-restdocs-mockmvc</artifactId>
 	<scope>test</scope>
 </dependency>
 ```
