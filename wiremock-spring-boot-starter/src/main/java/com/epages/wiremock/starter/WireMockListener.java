@@ -39,7 +39,7 @@ class WireMockListener extends AbstractTestExecutionListener implements Ordered 
 			return;
 		}
 
-		int port = InetUtils.getFreeServerPort();
+		int port = wireMockAnnotation.port() > 0 ? wireMockAnnotation.port() : InetUtils.getFreeServerPort();
 		ArrayList<String> properties = new ArrayList<>();
 		properties.add("wiremock.port=" + port);
 		properties.add("wiremock.enabled=true");
