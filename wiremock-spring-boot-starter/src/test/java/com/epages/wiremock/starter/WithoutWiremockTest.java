@@ -1,4 +1,4 @@
-package com.example.client;
+package com.epages.wiremock.starter;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,9 +11,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.github.tomakehurst.wiremock.WireMockServer;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = { ClientApplication.class })
+@SpringBootTest(classes=TestApp.class)
 @ActiveProfiles("test")
-public class SomeOtherTest {
+public class WithoutWiremockTest {
 
 	@Autowired(required = false)
 	private WireMockServer server;
@@ -22,4 +22,5 @@ public class SomeOtherTest {
 	public void should_not_have_wiremock_server() {
 		Assert.assertNull(server);
 	}
+	
 }

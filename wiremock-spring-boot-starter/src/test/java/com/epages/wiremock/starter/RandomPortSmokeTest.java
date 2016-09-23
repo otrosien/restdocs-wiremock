@@ -15,11 +15,11 @@ import org.springframework.web.client.RestTemplate;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 
-@WireMockTest(port = 8081)
+@WireMockTest
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @Configuration
-public class SmokeTest {
+public class RandomPortSmokeTest {
 
 	@Autowired
 	public WireMockServer server;
@@ -27,7 +27,6 @@ public class SmokeTest {
 	@Test
 	public void check_server_availability() {
 		assertThat(server.isRunning()).isTrue();
-		assertThat(server.port()).isEqualTo(8081);
 		ResponseEntity<String> result = new RestTemplate().exchange("http://localhost:" + server.port() + "/__admin", HttpMethod.GET, null, String.class);
 		assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}
