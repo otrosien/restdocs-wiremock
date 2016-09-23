@@ -40,19 +40,22 @@ task sourceJar(type: Jar) {
     from sourceSets.main.allJava
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifactId 'restdocs-wiremock'
-            groupId = project.group
-
-            artifact sourceJar {
-                classifier 'sources'
+model {
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+                artifactId 'restdocs-wiremock'
+                groupId = project.group
+    
+                artifact sourceJar {
+                    classifier 'sources'
+                }
             }
         }
     }
 }
+
 
 bintray {
     user = project.findProperty('bintrayUser')   ?: System.getenv('BINTRAY_USER')

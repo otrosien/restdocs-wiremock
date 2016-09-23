@@ -30,15 +30,15 @@ ext {
 }
 
 dependencies {
-	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-	compile 'org.springframework.boot:spring-boot-starter-hateoas'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-hateoas'
 
-	runtime 'com.h2database:h2'
-	runtime 'org.atteo:evo-inflector:1.2.1'
+    runtime 'com.h2database:h2'
+    runtime 'org.atteo:evo-inflector:1.2.1'
 
-	testCompile 'com.jayway.jsonpath:json-path'
-	testCompile 'org.springframework.boot:spring-boot-starter-test'
-	testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc'
+    testCompile 'com.jayway.jsonpath:json-path'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc'
     testCompile "com.epages:restdocs-wiremock:${project.version}"
 }
 
@@ -60,25 +60,27 @@ jar {
 }
 
 task wiremockJar(type: Jar) {
-	description = 'Generates the jar file containing the wiremock stubs for your REST API.'
-	group = 'Build'
-	classifier = 'wiremock'
-	dependsOn project.tasks.test
-	from (snippetsDir) {
-		include '**/wiremock-stub.json'
-		into "wiremock/${project.name}/mappings"
-	}
+    description = 'Generates the jar file containing the wiremock stubs for your REST API.'
+    group = 'Build'
+    classifier = 'wiremock'
+    dependsOn project.tasks.test
+    from (snippetsDir) {
+        include '**/wiremock-stub.json'
+        into "wiremock/${project.name}/mappings"
+    }
 }
 
-publishing {
-	publications {
-		wiremockJar(MavenPublication) {
-			from project.components.java
-			artifact project.tasks.wiremockJar {
-				classifier "wiremock"
-			}
-		}
-	}
+model {
+    publishing {
+        publications {
+            wiremockJar(MavenPublication) {
+                from project.components.java
+                artifact project.tasks.wiremockJar {
+                    classifier "wiremock"
+                }
+            }
+        }
+    }
 }
 
 eclipseJdt.onlyIf { false }
