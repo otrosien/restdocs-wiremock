@@ -7,10 +7,6 @@ repositories {
     jcenter()
 }
 
-ext {
-    springRestdocsVersion = '1.1.1.RELEASE'
-}
-
 scmVersion {
     tag {
         prefix = ''

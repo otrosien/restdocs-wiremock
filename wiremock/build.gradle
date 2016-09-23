@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    compile "org.springframework.restdocs:spring-restdocs-core:${rootProject.springRestdocsVersion}"
+    compile "org.springframework.restdocs:spring-restdocs-core:1.1.2.RELEASE"
     compileOnly 'junit:junit:4.12'
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.10.19'
