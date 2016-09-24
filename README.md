@@ -261,3 +261,9 @@ travis build of this tag should finally end up on [bintray](https://bintray.com/
 ```shell
 ./gradlew clean build release
 ```
+
+
+## Other resources
+
+- A similar approach is taken by [Spring Cloud Contract](https://github.com/spring-cloud/spring-cloud-contract/)
+
