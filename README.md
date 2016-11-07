@@ -181,7 +181,7 @@ transitive versions coming in through maven dependencies, you need to add an exp
 project, like shown in the following gradle example:
 
 ```groovy
-  testCompile('com.github.tomakehurst:wiremock:2.1.12')
+  testCompile('com.github.tomakehurst:wiremock:2.3.1')
 ```
 
 ### Configuring your test to use the WireMock stubs
