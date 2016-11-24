@@ -228,6 +228,8 @@ public class MyTest {
 
 ## Building from source
 
+Please execute at least step 1 + 2 if before importing restdocs-wiremock into your IDE.
+
 1. Publish the current restdocs-wiremock library code into your local maven repository.
 
   ```shell
@@ -235,7 +237,7 @@ public class MyTest {
   ```
 
 2.  Run the server tests, which uses the WireMock integration into Spring REST Docs. 
-    As a result, there is a `restdocs-server-wiremock` jar file in your maven repository.
+    As a result, there is a `restdocs-server-wiremock` jar file in your local maven repository.
     Mind that this jar only contains a set of json files without explicit dependency on WireMock itself. 
 
   ```shell
@@ -249,7 +251,6 @@ public class MyTest {
   ./gradlew restdocs-client:build
   ```
 
-  
 ## Publishing
 
 This project makes use of the [axion-release-plugin](https://github.com/allegro/axion-release-plugin)
@@ -261,7 +262,6 @@ travis build of this tag should finally end up on [bintray](https://bintray.com/
 ```shell
 ./gradlew clean build release
 ```
-
 
 ## Other resources
 
