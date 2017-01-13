@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.restdocs.RestDocumentationContext;
-import org.springframework.restdocs.cli.QueryStringParser;
 import org.springframework.restdocs.operation.Operation;
 import org.springframework.restdocs.operation.OperationRequest;
 import org.springframework.restdocs.operation.OperationResponse;
 import org.springframework.restdocs.operation.Parameters;
+import org.springframework.restdocs.operation.QueryStringParser;
 import org.springframework.restdocs.snippet.RestDocumentationContextPlaceholderResolverFactory;
 import org.springframework.restdocs.snippet.Snippet;
 import org.springframework.restdocs.snippet.StandardWriterResolver;
