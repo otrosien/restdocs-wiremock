@@ -40,17 +40,15 @@ task sourceJar(type: Jar) {
 
 bootRepackage.enabled = false
 
-model {
-    publishing {
-        publications {
-            mavenJava(MavenPublication) {
-                from components.java
-                artifactId 'wiremock-spring-boot-starter'
-                groupId = project.group
-    
-                artifact sourceJar {
-                    classifier 'sources'
-                }
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifactId 'wiremock-spring-boot-starter'
+            groupId = project.group
+
+            artifact sourceJar {
+                classifier 'sources'
             }
         }
     }
