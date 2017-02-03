@@ -15,9 +15,9 @@ dependencies {
     compile "org.springframework.restdocs:spring-restdocs-core:1.1.2.RELEASE"
     compileOnly 'junit:junit:4.12'
     testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:1.10.19'
+    testCompile 'org.mockito:mockito-core:2.7.1'
     testCompile 'uk.co.datumedge:hamcrest-json:0.2'
-    testCompile 'com.google.guava:guava:19.0'
+    testCompile 'com.google.guava:guava:21.0'
 }
 
 group = 'com.epages'
